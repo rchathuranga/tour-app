@@ -66,9 +66,9 @@ public class AdvisorListAdapter extends BaseAdapter {
 
         Advisor ongoing = ongoingslist.get(position);
 
-        holder.name.setText(ongoing.advisorName);
-        holder.email.setText(ongoing.email);
-        holder.imageView.setImageResource(ongoing.image);
+        holder.name.setText(ongoing.name);
+        holder.email.setText(ongoing.contact);
+        holder.imageView.setImageResource(R.drawable.test_advisor);
         return row;
     }
 }

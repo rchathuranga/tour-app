@@ -1,6 +1,7 @@
 package com.tourapp.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.tourapp.R;
 import com.tourapp.adapter.Advisor;
 import com.tourapp.adapter.AdvisorListAdapter;
@@ -61,6 +67,7 @@ public class AdvisorFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
     }
 
     @Override
@@ -73,21 +80,44 @@ public class AdvisorFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ArrayList<Advisor> advisorArrayList= new ArrayList<>();
-        int[] image={R.drawable.test_advisor,R.drawable.test_advisor,
-                R.drawable.test_advisor,R.drawable.test_advisor,R.drawable.test_advisor,
-                R.drawable.test_advisor,R.drawable.test_advisor};
-        String[] name ={"Test Advisor","Test Advisor","Test Advisor",
-                "Test Advisor","Test Advisor","Test Advisor","Test Advisor"};
-        String[] emails={"+947689521123","+947689521123",
-                "+947689521123","+947689521123","+947689521123",
-                "+947689521123","+947689521123"};
-        for(int i=0;i<image.length;i++){
-            Advisor advisor=new Advisor(name[i],emails[i],image[i]);
-            advisorArrayList.add(advisor);
-        }
-        ListView viewById = (ListView) view.findViewById(R.id.adviserListView);
-        AdvisorListAdapter ad= new AdvisorListAdapter(getActivity(),R.layout.advisor_list,advisorArrayList);
-        viewById.setAdapter(ad);
+        ArrayList<String> advisorArrayList= new ArrayList<>();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("advisor");
+
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot:snapshot.getChildren()){
+                    advisorArrayList.add(dataSnapshot.getValue().toString());
+                    System.out.println("advisorArrayList "+dataSnapshot.getValue().toString());
+
+                }
+                System.out.println(advisorArrayList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+//        ArrayList<Advisor> advisorArrayList= new ArrayList<>();
+//        int[] image={R.drawable.test_advisor,R.drawable.test_advisor,
+//                R.drawable.test_advisor,R.drawable.test_advisor,R.drawable.test_advisor,
+//                R.drawable.test_advisor,R.drawable.test_advisor};
+//        String[] name ={"Test Advisor","Test Advisor","Test Advisor",
+//                "Test Advisor","Test Advisor","Test Advisor","Test Advisor"};
+//        String[] emails={"+947689521123","+947689521123",
+//                "+947689521123","+947689521123","+947689521123",
+//                "+947689521123","+947689521123"};
+//        for(int i=0;i<image.length;i++){
+//            Advisor advisor=new Advisor(name[i],emails[i],image[i]);
+//            advisorArrayList.add(advisor);
+//        }
+//        ListView viewById = (ListView) view.findViewById(R.id.adviserListView);
+//        AdvisorListAdapter ad= new AdvisorListAdapter(getActivity(),R.layout.advisor_list,advisorArrayList);
+//        viewById.setAdapter(ad);
     }
 }

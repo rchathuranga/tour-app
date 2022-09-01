@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "983373919972",
+    "project_id": "booking-app-a2843",
+    "storage_bucket": "booking-app-a2843.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:983373919972:android:e1d51336289be45684def1",
+        "android_client_info": {
+          "package_name": "com.tourapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "983373919972-nnd8547njpiq4or67c5cdhdumdmldmhs.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDmr17uMq0I15W1JTEEBubrCOHqP9Gy_7w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "983373919972-nnd8547njpiq4or67c5cdhdumdmldmhs.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
