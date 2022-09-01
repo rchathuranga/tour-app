@@ -1,4 +1,4 @@
-package com.tourapp.adapter;
+package lk.proj.tourapp.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -7,18 +7,18 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.tourapp.R;
+import lk.proj.tourapp.R;
 
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class CabListAdapter extends BaseAdapter {
+public class HotelListAdapter extends BaseAdapter {
     private Context context;
     private int layout;
-    private ArrayList<Cab> ongoingslist;
+    private ArrayList<Hotel> ongoingslist;
 
-    public CabListAdapter(Context context, int layout, ArrayList<Cab> ongoingslist) {
+    public HotelListAdapter(Context context, int layout, ArrayList<Hotel> ongoingslist) {
         this.context = context;
         this.layout = layout;
         this.ongoingslist = ongoingslist;
@@ -26,7 +26,7 @@ public class CabListAdapter extends BaseAdapter {
 
 
     private class ViewHolder{
-        TextView driverName, contactNo;
+        TextView hotelName, location;
         CircleImageView imageView;
     }
 
@@ -56,20 +56,20 @@ public class CabListAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = inflater.inflate(layout,null);
 
-            holder.driverName = (TextView) row.findViewById(R.id.driverName);
-            holder.contactNo = (TextView) row.findViewById(R.id.contactNo);
-            holder.imageView = (CircleImageView) row.findViewById(R.id.cabProPic);
+            holder.hotelName = (TextView) row.findViewById(R.id.hotelName);
+            holder.location = (TextView) row.findViewById(R.id.location);
+            holder.imageView = (CircleImageView) row.findViewById(R.id.hotelProPic);
             row.setTag(holder);
 
         }else {
             holder = (ViewHolder) row.getTag();
         }
 
-        Cab ongoing = ongoingslist.get(position);
+        Hotel ongoing = ongoingslist.get(position);
 
-        holder.driverName.setText(ongoing.driverName);
-        holder.contactNo.setText(ongoing.contactNo);
-        holder.imageView.setImageResource(ongoing.image);
+        holder.hotelName.setText(ongoing.hotelName);
+        holder.location.setText(ongoing.location);
+        holder.imageView.setImageResource(ongoing.hotelimage);
         return row;
     }
 }

@@ -1,4 +1,4 @@
-package com.tourapp.fragment;
+package lk.proj.tourapp.fragment;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -11,30 +11,26 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.tourapp.R;
-import com.tourapp.adapter.Advisor;
-import com.tourapp.adapter.AdvisorListAdapter;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import lk.proj.tourapp.R;
+import lk.proj.tourapp.adapter.Advisor;
+import lk.proj.tourapp.adapter.AdvisorListAdapter;
 
 import java.util.ArrayList;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link AdvisorFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class AdvisorFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private FirebaseFirestore db;
+
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
@@ -42,15 +38,6 @@ public class AdvisorFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AdvisorFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static AdvisorFragment newInstance(String param1, String param2) {
         AdvisorFragment fragment = new AdvisorFragment();
         Bundle args = new Bundle();
@@ -63,6 +50,8 @@ public class AdvisorFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        db = FirebaseFirestore.getInstance();
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -80,27 +69,31 @@ public class AdvisorFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ArrayList<String> advisorArrayList= new ArrayList<>();
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("advisor");
+        ListView viewById = (ListView) view.findViewById(R.id.adviserListView);
+
+        ArrayList<Advisor> advisorList = new ArrayList<>();
+        AdvisorListAdapter ad = new AdvisorListAdapter(getActivity(), R.layout.advisor_list, advisorList);
+        viewById.setAdapter(ad);
 
 
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot:snapshot.getChildren()){
-                    advisorArrayList.add(dataSnapshot.getValue().toString());
-                    System.out.println("advisorArrayList "+dataSnapshot.getValue().toString());
+        db.collection("advisors").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Advisor advisor = new Advisor();
 
-                }
-                System.out.println(advisorArrayList);
-            }
+                                advisor.setName(document.getData().get("name").toString());
+                                advisorList.add(advisor);
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+                                ad.notifyDataSetChanged();
+                            }
+                        } else {
+                            Log.w("TAG", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
 
 
 //        ArrayList<Advisor> advisorArrayList= new ArrayList<>();
@@ -116,8 +109,5 @@ public class AdvisorFragment extends Fragment {
 //            Advisor advisor=new Advisor(name[i],emails[i],image[i]);
 //            advisorArrayList.add(advisor);
 //        }
-//        ListView viewById = (ListView) view.findViewById(R.id.adviserListView);
-//        AdvisorListAdapter ad= new AdvisorListAdapter(getActivity(),R.layout.advisor_list,advisorArrayList);
-//        viewById.setAdapter(ad);
     }
 }

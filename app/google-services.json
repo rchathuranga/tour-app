@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "983373919972",
-    "project_id": "booking-app-a2843",
-    "storage_bucket": "booking-app-a2843.appspot.com"
+    "project_number": "530932382162",
+    "project_id": "tour-app-2677d",
+    "storage_bucket": "tour-app-2677d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:983373919972:android:e1d51336289be45684def1",
+        "mobilesdk_app_id": "1:530932382162:android:c739c475b1808c55cc700b",
         "android_client_info": {
-          "package_name": "com.tourapp"
+          "package_name": "lk.proj.tourapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "983373919972-nnd8547njpiq4or67c5cdhdumdmldmhs.apps.googleusercontent.com",
+          "client_id": "530932382162-u7vnciap52ejlli5ltfjfn8v2pdmmjak.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDmr17uMq0I15W1JTEEBubrCOHqP9Gy_7w"
+          "current_key": "AIzaSyCpqBrcToewksoYFHwb7z70alMo-FuUzEU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "983373919972-nnd8547njpiq4or67c5cdhdumdmldmhs.apps.googleusercontent.com",
+              "client_id": "530932382162-u7vnciap52ejlli5ltfjfn8v2pdmmjak.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
