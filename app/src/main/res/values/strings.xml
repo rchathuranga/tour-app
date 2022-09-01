@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">tour-app</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="signup">SignUp</string>
+    <string name="SignUp">SignUp</string>
+    <string name="welcome">WELCOME</string>
+    <string name="login">LOGIN</string>
+    <string name="forgot_your_password">Forgot your password?</string>
+</resources>

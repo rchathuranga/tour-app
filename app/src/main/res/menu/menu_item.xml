@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:title="Home"
+        android:icon="@drawable/ic_baseline_home_24"/>
+    <item
+        android:id="@+id/adviser"
+        android:title="Advisor"
+        android:icon="@drawable/ic_baseline_emoji_people_24"/>
+    <item
+        android:id="@+id/hotel"
+        android:title="Hotel"
+        android:icon="@drawable/ic_baseline_location_city_24"/>
+    <item
+        android:id="@+id/table"
+        android:title="Table"
+        android:icon="@drawable/ic_baseline_emoji_food_beverage_24"/>
+    <item
+        android:id="@+id/cab"
+        android:title="Cad"
+        android:icon="@drawable/ic_baseline_directions_car_24"/>
+</menu>
