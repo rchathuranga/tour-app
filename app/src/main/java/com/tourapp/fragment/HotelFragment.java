@@ -1,15 +1,18 @@
 package com.tourapp.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.tourapp.Hotel_Details;
 import com.tourapp.R;
 import com.tourapp.adapter.Hotel;
 import com.tourapp.adapter.HotelListAdapter;
@@ -90,5 +93,14 @@ public class HotelFragment extends Fragment {
         ListView viewById = (ListView) view.findViewById(R.id.hotelListView);
         HotelListAdapter ad= new HotelListAdapter(getActivity(),R.layout.hotel_list,hotelArrayList);
         viewById.setAdapter(ad);
+        viewById.setClickable(true);
+        viewById.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getActivity(), Hotel_Details.class);
+                intent.putExtra("name",name[i]);
+                startActivity(intent);
+            }
+        });
     }
 }

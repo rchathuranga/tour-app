@@ -1,10 +1,12 @@
 package com.tourapp.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -16,6 +18,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.tourapp.Advisor_Details;
+import com.tourapp.MainActivity;
 import com.tourapp.R;
 import com.tourapp.adapter.Advisor;
 import com.tourapp.adapter.AdvisorListAdapter;
@@ -27,7 +31,7 @@ import java.util.ArrayList;
  * Use the {@link AdvisorFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AdvisorFragment extends Fragment {
+public class AdvisorFragment extends Fragment{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -80,44 +84,33 @@ public class AdvisorFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ArrayList<String> advisorArrayList= new ArrayList<>();
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("advisor");
-
-
-        myRef.addValueEventListener(new ValueEventListener() {
+        ArrayList<Advisor> advisorArrayList= new ArrayList<>();
+        int[] image={R.drawable.test_advisor,R.drawable.test_advisor,
+                R.drawable.test_advisor,R.drawable.test_advisor,R.drawable.test_advisor,
+                R.drawable.test_advisor,R.drawable.test_advisor};
+        String[] name ={"Test Advisor","Test ","Test Advisor",
+                "Test Advisor"," Advisor","Test Advisor","dfsjjdshjh Advisor"};
+        String[] contact={"+947689521123","+947689521123",
+                "+947689521123","+947689521123","+947689521123",
+                "+947689521123","+947689521123"};
+        for(int i=0;i<image.length;i++){
+            Advisor advisor=new Advisor("A001",name[i],contact[i],"NOT HIRED","NOT FOUND");
+            advisorArrayList.add(advisor);
+        }
+        ListView viewById = (ListView) view.findViewById(R.id.adviserListView);
+        AdvisorListAdapter ad= new AdvisorListAdapter(getActivity(),R.layout.advisor_list,advisorArrayList);
+        viewById.setAdapter(ad);
+        viewById.setClickable(true);
+        viewById.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for(DataSnapshot dataSnapshot:snapshot.getChildren()){
-                    advisorArrayList.add(dataSnapshot.getValue().toString());
-                    System.out.println("advisorArrayList "+dataSnapshot.getValue().toString());
-
-                }
-                System.out.println(advisorArrayList);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                System.out.println("CLICKED"+i);
+                Intent intent = new Intent(getActivity(),Advisor_Details.class);
+                intent.putExtra("name",name[i]);
+                startActivity(intent);
 
             }
         });
 
-
-//        ArrayList<Advisor> advisorArrayList= new ArrayList<>();
-//        int[] image={R.drawable.test_advisor,R.drawable.test_advisor,
-//                R.drawable.test_advisor,R.drawable.test_advisor,R.drawable.test_advisor,
-//                R.drawable.test_advisor,R.drawable.test_advisor};
-//        String[] name ={"Test Advisor","Test Advisor","Test Advisor",
-//                "Test Advisor","Test Advisor","Test Advisor","Test Advisor"};
-//        String[] emails={"+947689521123","+947689521123",
-//                "+947689521123","+947689521123","+947689521123",
-//                "+947689521123","+947689521123"};
-//        for(int i=0;i<image.length;i++){
-//            Advisor advisor=new Advisor(name[i],emails[i],image[i]);
-//            advisorArrayList.add(advisor);
-//        }
-//        ListView viewById = (ListView) view.findViewById(R.id.adviserListView);
-//        AdvisorListAdapter ad= new AdvisorListAdapter(getActivity(),R.layout.advisor_list,advisorArrayList);
-//        viewById.setAdapter(ad);
     }
 }

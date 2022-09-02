@@ -1,22 +1,27 @@
 package com.tourapp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.tourapp.Advisor_Details;
+import com.tourapp.MainActivity;
 import com.tourapp.R;
+import com.tourapp.databinding.ActivityMainBinding;
 
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class AdvisorListAdapter extends BaseAdapter {
+public class AdvisorListAdapter extends BaseAdapter{
     private Context context;
     private int layout;
     private ArrayList<Advisor> ongoingslist;
+    ActivityMainBinding binding;
 
     public AdvisorListAdapter(Context context, int layout, ArrayList<Advisor> ongoingslist) {
         this.context = context;
@@ -49,10 +54,10 @@ public class AdvisorListAdapter extends BaseAdapter {
     public View getView(int position, View view, ViewGroup viewGroup) {
         View row = view;
         ViewHolder holder = new ViewHolder();
-
+        LayoutInflater inflater;
 
         if(row == null){
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+           inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = inflater.inflate(layout,null);
 
             holder.name = (TextView) row.findViewById(R.id.advisorName);
@@ -69,6 +74,7 @@ public class AdvisorListAdapter extends BaseAdapter {
         holder.name.setText(ongoing.name);
         holder.email.setText(ongoing.contact);
         holder.imageView.setImageResource(R.drawable.test_advisor);
+
         return row;
     }
 }
