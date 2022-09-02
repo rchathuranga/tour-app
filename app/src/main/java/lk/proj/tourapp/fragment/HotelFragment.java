@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import lk.proj.tourapp.R;
 import lk.proj.tourapp.adapter.Hotel;
 import lk.proj.tourapp.adapter.HotelListAdapter;
@@ -34,6 +36,8 @@ public class HotelFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private FirebaseFirestore db;
 
     public HotelFragment() {
         // Required empty public constructor

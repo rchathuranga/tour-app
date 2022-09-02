@@ -88,6 +88,13 @@ public class AdvisorFragment extends Fragment {
                                 Advisor advisor = new Advisor();
 
                                 advisor.setName(document.getData().get("name").toString());
+                                advisor.setId(document.getId());
+                                advisor.setContact(document.getData().get("contactNo").toString());
+                                advisor.setBadReviews(Integer.parseInt(document.getData().get("badReview").toString()));
+                                advisor.setGoodReviews(Integer.parseInt(document.getData().get("goodReview").toString()));
+                                advisor.setHiredCount(Integer.parseInt(document.getData().get("hiredCount").toString()));
+                                advisor.setImg(document.getData().get("imageUrl").toString());
+                                advisor.setEmail(document.getData().get("email").toString());
                                 advisorList.add(advisor);
 
                                 ad.notifyDataSetChanged();
@@ -103,9 +110,10 @@ public class AdvisorFragment extends Fragment {
         viewById.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                System.out.println("CLICKED"+i);
+
                 Intent intent = new Intent(getActivity(), Advisor_Details.class);
-                intent.putExtra("advisor",advisorList.get(i).getId());
+                intent.putExtra("advisorId",advisorList.get(i).getId());
+                System.out.println(advisorList.get(i).getId());
                 startActivity(intent);
 
             }
