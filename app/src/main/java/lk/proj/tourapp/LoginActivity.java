@@ -46,8 +46,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
         if (currentUser != null) {
-//            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//            startActivity(intent);
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
         }
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -68,8 +68,6 @@ public class LoginActivity extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                         if (task.isSuccessful()) {
-                                            // Sign in success, update UI with the signed-in user's information
-//                                        Log.d(TAG, "signInWithEmail:success");
                                             FirebaseUser user = mAuth.getCurrentUser();
                                             System.out.println(user.getDisplayName());
 

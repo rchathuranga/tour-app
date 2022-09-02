@@ -8,14 +8,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.tourapp.Advisor_Details;
-import com.tourapp.MainActivity;
-import com.tourapp.databinding.ActivityMainBinding;
+import lk.proj.tourapp.Advisor_Details;
 import lk.proj.tourapp.R;
 
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import lk.proj.tourapp.databinding.ActivityMainBinding;
 
 public class AdvisorListAdapter extends BaseAdapter{
     private Context context;

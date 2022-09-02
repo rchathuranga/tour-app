@@ -19,6 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import lk.proj.tourapp.Advisor_Details;
 import lk.proj.tourapp.R;
 import lk.proj.tourapp.adapter.Advisor;
 import lk.proj.tourapp.adapter.AdvisorListAdapter;
@@ -103,8 +104,8 @@ public class AdvisorFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 System.out.println("CLICKED"+i);
-                Intent intent = new Intent(getActivity(),Advisor_Details.class);
-                intent.putExtra("advisor",advisorList.get(i));
+                Intent intent = new Intent(getActivity(), Advisor_Details.class);
+                intent.putExtra("advisor",advisorList.get(i).getId());
                 startActivity(intent);
 
             }

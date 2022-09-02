@@ -1,4 +1,4 @@
-package com.tourapp;
+package lk.proj.tourapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.tourapp.databinding.ActivityAdvisorDetailsBinding;
+import lk.proj.tourapp.databinding.ActivityAdvisorDetailsBinding;
 
 public class Advisor_Details extends AppCompatActivity {
 

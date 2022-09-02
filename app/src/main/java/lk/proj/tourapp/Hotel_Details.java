@@ -1,4 +1,4 @@
-package com.tourapp;
+package lk.proj.tourapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.tourapp.databinding.ActivityAdvisorDetailsBinding;
-import com.tourapp.databinding.ActivityHotelDetailsBinding;
+import lk.proj.tourapp.databinding.ActivityAdvisorDetailsBinding;
+import lk.proj.tourapp.databinding.ActivityHotelDetailsBinding;
 
 public class Hotel_Details extends AppCompatActivity {
     Button bookButton;
