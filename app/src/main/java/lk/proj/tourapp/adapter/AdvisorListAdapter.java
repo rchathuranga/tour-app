@@ -1,24 +1,29 @@
-package com.tourapp.adapter;
+package lk.proj.tourapp.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.tourapp.R;
+import com.tourapp.Advisor_Details;
+import com.tourapp.MainActivity;
+import com.tourapp.databinding.ActivityMainBinding;
+import lk.proj.tourapp.R;
 
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class HotelListAdapter extends BaseAdapter {
+public class AdvisorListAdapter extends BaseAdapter{
     private Context context;
     private int layout;
-    private ArrayList<Hotel> ongoingslist;
+    private ArrayList<Advisor> ongoingslist;
+    ActivityMainBinding binding;
 
-    public HotelListAdapter(Context context, int layout, ArrayList<Hotel> ongoingslist) {
+    public AdvisorListAdapter(Context context, int layout, ArrayList<Advisor> ongoingslist) {
         this.context = context;
         this.layout = layout;
         this.ongoingslist = ongoingslist;
@@ -26,7 +31,7 @@ public class HotelListAdapter extends BaseAdapter {
 
 
     private class ViewHolder{
-        TextView hotelName, location;
+        TextView name,email;
         CircleImageView imageView;
     }
 
@@ -47,29 +52,29 @@ public class HotelListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View view, ViewGroup viewGroup) {
-
         View row = view;
         ViewHolder holder = new ViewHolder();
-
+        LayoutInflater inflater;
 
         if(row == null){
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+           inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = inflater.inflate(layout,null);
 
-            holder.hotelName = (TextView) row.findViewById(R.id.hotelName);
-            holder.location = (TextView) row.findViewById(R.id.location);
-            holder.imageView = (CircleImageView) row.findViewById(R.id.hotelProPic);
+            holder.name = (TextView) row.findViewById(R.id.advisorName);
+            holder.email= (TextView) row.findViewById(R.id.advisorsEmail);
+            holder.imageView = (CircleImageView) row.findViewById(R.id.advisorProPic);
             row.setTag(holder);
 
         }else {
             holder = (ViewHolder) row.getTag();
         }
 
-        Hotel ongoing = ongoingslist.get(position);
+        Advisor ongoing = ongoingslist.get(position);
 
-        holder.hotelName.setText(ongoing.hotelName);
-        holder.location.setText(ongoing.location);
-        holder.imageView.setImageResource(ongoing.hotelimage);
+        holder.name.setText(ongoing.name);
+        holder.email.setText(ongoing.contact);
+        holder.imageView.setImageResource(R.drawable.test_advisor);
+
         return row;
     }
 }

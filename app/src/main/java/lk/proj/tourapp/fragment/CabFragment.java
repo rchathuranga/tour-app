@@ -1,4 +1,4 @@
-package com.tourapp.fragment;
+package lk.proj.tourapp.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,9 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.tourapp.R;
-import com.tourapp.adapter.Cab;
-import com.tourapp.adapter.CabListAdapter;
+import lk.proj.tourapp.R;
+import lk.proj.tourapp.adapter.Cab;
+import lk.proj.tourapp.adapter.CabListAdapter;
 
 import java.util.ArrayList;
 

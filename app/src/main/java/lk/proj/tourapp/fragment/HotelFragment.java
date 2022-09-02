@@ -1,4 +1,4 @@
-package com.tourapp.fragment;
+package lk.proj.tourapp.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,10 +12,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.tourapp.Hotel_Details;
-import com.tourapp.R;
-import com.tourapp.adapter.Hotel;
-import com.tourapp.adapter.HotelListAdapter;
+import lk.proj.tourapp.R;
+import lk.proj.tourapp.adapter.Hotel;
+import lk.proj.tourapp.adapter.HotelListAdapter;
+import lk.proj.tourapp.Hotel_Details;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package com.tourapp;
+package lk.proj.tourapp;
 
 import org.junit.Test;
 

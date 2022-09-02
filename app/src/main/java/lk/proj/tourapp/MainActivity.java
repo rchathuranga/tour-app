@@ -1,20 +1,21 @@
-package com.tourapp;
+package lk.proj.tourapp;
 
 import android.os.Bundle;
 import android.view.View;
+
+
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.tourapp.databinding.ActivityMainBinding;
-import com.tourapp.fragment.AdvisorFragment;
-import com.tourapp.fragment.CabFragment;
-import com.tourapp.fragment.HomeFragment;
-import com.tourapp.fragment.HotelFragment;
-import com.tourapp.fragment.TableFragment;
-
+import lk.proj.tourapp.databinding.ActivityMainBinding;
+import lk.proj.tourapp.fragment.AdvisorFragment;
+import lk.proj.tourapp.fragment.CabFragment;
+import lk.proj.tourapp.fragment.HomeFragment;
+import lk.proj.tourapp.fragment.HotelFragment;
+import lk.proj.tourapp.fragment.TableFragment;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
@@ -80,6 +81,4 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frame_layout,fragment);
         fragmentTransaction.commit();
     }
-
-
 }

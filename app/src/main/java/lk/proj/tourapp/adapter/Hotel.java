@@ -1,4 +1,4 @@
-package com.tourapp.adapter;
+package lk.proj.tourapp.adapter;
 
 public class Hotel {
     String hotelName, location;
