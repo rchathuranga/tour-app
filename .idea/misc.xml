@@ -7,7 +7,10 @@
         <entry key="..\:/Android/tour-app/app/src/main/res/drawable/nav_bg.xml" value="0.1935" />
         <entry key="..\:/Android/tour-app/app/src/main/res/layout/activity_login.xml" value="0.35733695652173914" />
         <entry key="..\:/Android/tour-app/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
+        <entry key="..\:/Android/tour-app/app/src/main/res/layout/fragment_advisor.xml" value="0.3625" />
         <entry key="..\:/Android/tour-app/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Android/tour-app/app/src/main/res/layout/fragment_notifications.xml" value="0.1" />
+        <entry key="..\:/Android/tour-app/app/src/main/res/layout/hotel_list.xml" value="0.29981884057971014" />
         <entry key="..\:/Android/tour-app/app/src/main/res/menu/menu_item.xml" value="0.3625" />
       </map>
     </option>

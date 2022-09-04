@@ -4,46 +4,89 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp">
+        android:layout_margin="8dp">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="16dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <!-- Media -->
+            <ImageView
                 android:id="@+id/hotelProPic"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
-                android:layout_marginStart="20dp"
-                android:src="@drawable/hotel_sample"/>
+                android:layout_width="match_parent"
+                android:layout_height="194dp"
+                android:scaleType="centerCrop"
+                />
+
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:orientation="vertical">
-
-                <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal" >
+                <LinearLayout
+                    android:minWidth="220dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/hotelName"
-                    android:textColor="@color/black"
-                    android:textSize="24sp"/>
+                    android:orientation="vertical"
+                    android:padding="16dp">
 
-                <TextView
+                    <!-- Title, secondary and supporting text -->
+                    <TextView
+                        android:id="@+id/hotelName"
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hotel Name"
+                        android:textAppearance="?attr/textAppearanceHeadline6"
+                        />
+                    <TextView
+                        android:id="@+id/location"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Location"
+                        android:layout_marginTop="5dp"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="?android:attr/textColorSecondary"
+                        />
+                    <TextView
+                        android:id="@+id/hotelPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="$ Price"
+                        android:textAppearance="?attr/textAppearanceBody2"
+                        android:textColor="?android:attr/textColorSecondary"
+                        />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:id="@+id/location"/>
+                    android:layout_margin="8dp"
+                    android:orientation="vertical">
 
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:text="View More" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:text="Book Now" />
+                </LinearLayout>
             </LinearLayout>
+
 
         </LinearLayout>
 
-    </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
 
 </LinearLayout>

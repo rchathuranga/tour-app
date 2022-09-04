@@ -1,14 +1,19 @@
 package lk.proj.tourapp.fragment;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -17,6 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import lk.proj.tourapp.MainActivity;
 import lk.proj.tourapp.R;
 import lk.proj.tourapp.adapter.Advisor;
 import lk.proj.tourapp.adapter.AdvisorListAdapter;
@@ -26,7 +32,7 @@ import java.util.ArrayList;
 public class AdvisorFragment extends Fragment {
 
     private FirebaseFirestore db;
-
+    private ListView listView;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -63,6 +69,8 @@ public class AdvisorFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_advisor, container, false);
+
+        listView = view.findViewById(R.id.adviserListView);
         return view;
     }
 
@@ -94,6 +102,14 @@ public class AdvisorFragment extends Fragment {
                         }
                     }
                 });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
 //        ArrayList<Advisor> advisorArrayList= new ArrayList<>();
