@@ -1,8 +1,6 @@
 package lk.proj.tourapp.fragment;
 
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.database.Cursor;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -13,7 +11,6 @@ import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,7 +19,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import lk.proj.tourapp.MainActivity;
 import lk.proj.tourapp.R;
 import lk.proj.tourapp.adapter.Advisor;
 import lk.proj.tourapp.adapter.AdvisorListAdapter;
@@ -93,6 +89,13 @@ public class AdvisorFragment extends Fragment {
                                 Advisor advisor = new Advisor();
 
                                 advisor.setName(document.getData().get("name").toString());
+                                advisor.setId(document.getId());
+                                advisor.setContact(document.getData().get("contactNo").toString());
+                                advisor.setBadReviews(Integer.parseInt(document.getData().get("badReview").toString()));
+                                advisor.setGoodReviews(Integer.parseInt(document.getData().get("goodReview").toString()));
+                                advisor.setHiredCount(Integer.parseInt(document.getData().get("hiredCount").toString()));
+                                advisor.setImg(document.getData().get("imageUrl").toString());
+                                advisor.setEmail(document.getData().get("email").toString());
                                 advisorList.add(advisor);
 
                                 ad.notifyDataSetChanged();
@@ -103,27 +106,18 @@ public class AdvisorFragment extends Fragment {
                     }
                 });
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        viewById.setClickable(true);
+        viewById.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity().getApplicationContext(), MainActivity.class);
-                startActivity(intent);
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+//                Intent intent = new Intent(getActivity(), Advisor_Details.class);
+//                intent.putExtra("advisorId",advisorList.get(i).getId());
+//                System.out.println(advisorList.get(i).getId());
+//                startActivity(intent);
+
             }
         });
-
-
-//        ArrayList<Advisor> advisorArrayList= new ArrayList<>();
-//        int[] image={R.drawable.test_advisor,R.drawable.test_advisor,
-//                R.drawable.test_advisor,R.drawable.test_advisor,R.drawable.test_advisor,
-//                R.drawable.test_advisor,R.drawable.test_advisor};
-//        String[] name ={"Test Advisor","Test Advisor","Test Advisor",
-//                "Test Advisor","Test Advisor","Test Advisor","Test Advisor"};
-//        String[] emails={"+947689521123","+947689521123",
-//                "+947689521123","+947689521123","+947689521123",
-//                "+947689521123","+947689521123"};
-//        for(int i=0;i<image.length;i++){
-//            Advisor advisor=new Advisor(name[i],emails[i],image[i]);
-//            advisorArrayList.add(advisor);
-//        }
     }
 }
