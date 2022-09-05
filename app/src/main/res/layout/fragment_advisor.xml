@@ -3,14 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D5E1E6"
+    android:background="#FFFFFF"
     tools:context=".fragment.AdvisorFragment">
 
    <ListView
        android:layout_width="match_parent"
        android:layout_height="match_parent"
        android:id="@+id/adviserListView"
-       tools:listitem="@layout/advisor_list"
-       />
+       tools:listitem="@layout/advisor_list" />
 
 </FrameLayout>

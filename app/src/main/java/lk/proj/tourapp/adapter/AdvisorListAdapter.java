@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import lk.proj.tourapp.Advisor_Details;
 import lk.proj.tourapp.R;
 
@@ -72,7 +74,7 @@ public class AdvisorListAdapter extends BaseAdapter{
 
         holder.name.setText(ongoing.name);
         holder.email.setText(ongoing.contact);
-        holder.imageView.setImageResource(R.drawable.test_advisor);
+        Picasso.get().load(ongoing.img).into(holder.imageView);
 
         return row;
     }

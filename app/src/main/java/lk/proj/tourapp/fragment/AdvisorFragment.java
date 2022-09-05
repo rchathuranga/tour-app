@@ -1,6 +1,7 @@
 package lk.proj.tourapp.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import lk.proj.tourapp.Advisor_Details;
 import lk.proj.tourapp.R;
 import lk.proj.tourapp.adapter.Advisor;
 import lk.proj.tourapp.adapter.AdvisorListAdapter;
@@ -88,8 +90,8 @@ public class AdvisorFragment extends Fragment {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Advisor advisor = new Advisor();
 
-                                advisor.setName(document.getData().get("name").toString());
                                 advisor.setId(document.getId());
+                                advisor.setName(document.getData().get("name").toString());
                                 advisor.setContact(document.getData().get("contactNo").toString());
                                 advisor.setBadReviews(Integer.parseInt(document.getData().get("badReview").toString()));
                                 advisor.setGoodReviews(Integer.parseInt(document.getData().get("goodReview").toString()));
@@ -112,10 +114,10 @@ public class AdvisorFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-//                Intent intent = new Intent(getActivity(), Advisor_Details.class);
-//                intent.putExtra("advisorId",advisorList.get(i).getId());
-//                System.out.println(advisorList.get(i).getId());
-//                startActivity(intent);
+                Intent intent = new Intent(getActivity(), Advisor_Details.class);
+                intent.putExtra("advisorId",advisorList.get(i).getId());
+                System.out.println(advisorList.get(i).getId());
+                startActivity(intent);
 
             }
         });

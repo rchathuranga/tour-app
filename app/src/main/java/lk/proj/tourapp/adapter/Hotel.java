@@ -1,6 +1,8 @@
 package lk.proj.tourapp.adapter;
 
-public class Hotel {
+import java.io.Serializable;
+
+public class Hotel implements Serializable {
     private String hotelId;
     private String hotelName;
     private String email;

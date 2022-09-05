@@ -1,16 +1,17 @@
 package lk.proj.tourapp.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -21,6 +22,7 @@ import lk.proj.tourapp.R;
 import lk.proj.tourapp.adapter.Advisor;
 import lk.proj.tourapp.adapter.Hotel;
 import lk.proj.tourapp.adapter.HotelListAdapter;
+import lk.proj.tourapp.Hotel_Details;
 
 import java.util.ArrayList;
 
@@ -75,6 +77,7 @@ public class HotelFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         ArrayList<Hotel> hotelArrayList = new ArrayList<>();
         HotelListAdapter ad = new HotelListAdapter(getActivity(), R.layout.hotel_list, hotelArrayList);
         listView.setAdapter(ad);
@@ -102,5 +105,15 @@ public class HotelFragment extends Fragment {
                         }
                     }
                 });
+
+        listView.setClickable(true);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getActivity(), Hotel_Details.class);
+                intent.putExtra("hotel", hotelArrayList.get(i));
+                startActivity(intent);
+            }
+        });
     }
 }

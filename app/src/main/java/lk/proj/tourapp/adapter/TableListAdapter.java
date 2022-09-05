@@ -57,7 +57,7 @@ public class TableListAdapter extends BaseAdapter {
 
 //            holder.hotelName = (TextView) row.findViewById(R.id.hotelName);
             holder.location = (TextView) row.findViewById(R.id.location);
-            holder.imageView = (CircleImageView) row.findViewById(R.id.hotelProPic);
+//            holder.imageView = (CircleImageView) row.findViewById(R.id.hotelProPic);
             row.setTag(holder);
 
         }else {
@@ -67,8 +67,8 @@ public class TableListAdapter extends BaseAdapter {
         Hotel ongoing = ongoingslist.get(position);
 
 //        holder.hotelName.setText(ongoing.hotelName);
-        holder.location.setText(ongoing.location);
-        holder.imageView.setImageResource(ongoing.hotelimage);
+//        holder.location.setText(ongoing.location);
+//        holder.imageView.setImageResource(ongoing.hotelimage);
         return row;
     }
 }
