@@ -7,6 +7,7 @@ public class User implements Serializable {
     private String name;
     private String contactNo;
     private String email;
+    private String advisorId;
 
     public String getUserId() {
         return userId;
@@ -34,6 +35,13 @@ public class User implements Serializable {
     }
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAdvisorId() {
+        return advisorId;
+    }
+    public void setAdvisorId(String advisorId) {
+        this.advisorId = advisorId;
     }
 
     @Override

@@ -48,8 +48,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         if (currentUser != null) {
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
+            validateUserAndNavigate();
         }
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -69,33 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                                     @Override
                                     public void onComplete(@NonNull Task<AuthResult> task) {
                                         if (task.isSuccessful()) {
-                                            FirebaseUser user = mAuth.getCurrentUser();
-
-                                            db.collection("users")
-                                                    .get()
-                                                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                                        @Override
-                                                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                                                            if (task.isSuccessful()) {
-                                                                for (QueryDocumentSnapshot document : task.getResult()) {
-                                                                    System.out.println("User = >" + document.getId());
-                                                                    System.out.println("User = >" + document.getData());
-                                                                    User myUser = new User();
-                                                                    myUser.setUserId(user.getUid());
-                                                                    myUser.setName(document.getData().get("name").toString());
-                                                                    myUser.setContactNo(document.getData().get("contactNo").toString());
-                                                                    myUser.setEmail(document.getData().get("email").toString());
-
-                                                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                                                    intent.putExtra("user", myUser);
-                                                                    startActivity(intent);
-                                                                }
-                                                            } else {
-                                                                Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                                                        Toast.LENGTH_SHORT).show();
-                                                            }
-                                                        }
-                                                    });
+                                            validateUserAndNavigate();
                                         } else {
                                             // If sign in fails, display a message to the user.
 //                                        Log.w(TAG, "signInWithEmail:failure", task.getException());
@@ -110,6 +83,35 @@ public class LoginActivity extends AppCompatActivity {
                 });
             }
         });
+    }
 
+    public void validateUserAndNavigate() {
+        FirebaseUser user = mAuth.getCurrentUser();
+
+        db.collection("users")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                System.out.println("User = >" + document.getId());
+                                System.out.println("User = >" + document.getData());
+                                User myUser = new User();
+                                myUser.setUserId(user.getUid());
+                                myUser.setName(document.getData().get("name").toString());
+//                                myUser.setContactNo(document.getData().get("contactNo").toString());
+//                                myUser.setEmail(document.getData().get("email").toString());
+
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                intent.putExtra("user", myUser);
+                                startActivity(intent);
+                            }
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
     }
 }

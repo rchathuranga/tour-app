@@ -24,11 +24,13 @@ import lk.proj.tourapp.Advisor_Details;
 import lk.proj.tourapp.R;
 import lk.proj.tourapp.adapter.Advisor;
 import lk.proj.tourapp.adapter.AdvisorListAdapter;
+import lk.proj.tourapp.dto.User;
 
 import java.util.ArrayList;
 
 public class AdvisorFragment extends Fragment {
 
+    private User user;
     private FirebaseFirestore db;
     private ListView listView;
 
@@ -55,6 +57,8 @@ public class AdvisorFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         db = FirebaseFirestore.getInstance();
+
+        user = (User) requireActivity().getIntent().getSerializableExtra("user");
 
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -116,6 +120,7 @@ public class AdvisorFragment extends Fragment {
 
                 Intent intent = new Intent(getActivity(), Advisor_Details.class);
                 intent.putExtra("advisorId",advisorList.get(i).getId());
+                intent.putExtra("user", user);
                 System.out.println(advisorList.get(i).getId());
                 startActivity(intent);
 

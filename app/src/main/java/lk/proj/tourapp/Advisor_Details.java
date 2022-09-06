@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -19,9 +20,11 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 
 import lk.proj.tourapp.adapter.Advisor;
 import lk.proj.tourapp.databinding.ActivityAdvisorDetailsBinding;
+import lk.proj.tourapp.dto.User;
 
 public class Advisor_Details extends AppCompatActivity {
 
@@ -41,77 +44,77 @@ public class Advisor_Details extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding=ActivityAdvisorDetailsBinding.inflate(getLayoutInflater());
+        binding = ActivityAdvisorDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        name=findViewById(R.id.adviserDetailsNameText);
-        hiredCount=findViewById(R.id.hiredCountText);
-        goodReviews=findViewById(R.id.goodReviesCoutTex);
-        badReviews=findViewById(R.id.badReviewsCoutText);
-        email=findViewById(R.id.advisorGmailText);
-        contactNo=findViewById(R.id.advisorContactNoText);
+        name = findViewById(R.id.adviserDetailsNameText);
+        hiredCount = findViewById(R.id.hiredCountText);
+        goodReviews = findViewById(R.id.goodReviesCoutTex);
+        badReviews = findViewById(R.id.badReviewsCoutText);
+        email = findViewById(R.id.advisorGmailText);
+        contactNo = findViewById(R.id.advisorContactNoText);
+        proPic = findViewById(R.id.advisorProPic);
 
-        decorView=getWindow().getDecorView();
+        decorView = getWindow().getDecorView();
         decorView.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
             @Override
             public void onSystemUiVisibilityChange(int visibility) {
-                if(visibility==0) {
+                if (visibility == 0) {
                     decorView.setSystemUiVisibility(hideSystemBars());
                 }
             }
         });
 
         Intent intent = this.getIntent();
-        if(intent != null){
-            advisorId =intent.getStringExtra("advisorId");
-        }
+        advisorId = intent.getStringExtra("advisorId");
+        User user = (User) intent.getSerializableExtra("user");
+
         db = FirebaseFirestore.getInstance();
+        getAdvisors(advisorId);
 
-            getAdvisors(advisorId);
-
-        hireButton=findViewById(R.id.advisorHireButton);
+        hireButton = findViewById(R.id.advisorHireButton);
         hireButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showAlert(advisorId);
+                updateUserSelectedAdvisor(user, advisorId);
             }
         });
     }
+
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
-        if(hasFocus){
+        if (hasFocus) {
             decorView.setSystemUiVisibility(hideSystemBars());
         }
     }
 
-    private int hideSystemBars(){
-        return  View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                |View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                |View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                |View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                |View.SYSTEM_UI_FLAG_FULLSCREEN
-                |View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+    private int hideSystemBars() {
+        return View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
     }
 
-    private void showAlert(String name){
+    private void showAlert(String name) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("you hired "+name+" as your advisor")
+        builder.setMessage("you hired " + name + " as your advisor")
                 .setCancelable(false)
                 .setNegativeButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.cancel();
                     }
                 })
-                .setTitle("Succcess!")
+                .setTitle("Success!")
                 .setIcon(R.drawable.ic_baseline_sentiment_satisfied_alt_24);
         AlertDialog alert = builder.create();
         alert.show();
     }
 
-    private void getAdvisors(String id){
+    private void getAdvisors(String id) {
 
-        System.out.println("GET + "+id);
         db.collection("advisors").document(id).get()
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
@@ -119,13 +122,13 @@ public class Advisor_Details extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             System.out.println(task.getResult().getData());
 
-                                    name.setText(task.getResult().getData().get("name").toString());
-                                    contactNo.setText(task.getResult().getData().get("contactNo").toString());
-                                    badReviews.setText(task.getResult().getData().get("badReview").toString());
-                                    goodReviews.setText(task.getResult().getData().get("goodReview").toString());
-                                    hiredCount.setText(task.getResult().getData().get("hiredCount").toString());
-//                                    proPic.setImageBitmap();
-                                    email.setText(task.getResult().getData().get("email").toString());
+                            name.setText(task.getResult().getData().get("name").toString());
+                            contactNo.setText(task.getResult().getData().get("contactNo").toString());
+                            badReviews.setText(task.getResult().getData().get("badReview").toString());
+                            goodReviews.setText(task.getResult().getData().get("goodReview").toString());
+                            hiredCount.setText(task.getResult().getData().get("hiredCount").toString());
+                            Picasso.get().load(task.getResult().getData().get("imageUrl").toString()).into(proPic);
+                            email.setText(task.getResult().getData().get("email").toString());
 
 
                         } else {
@@ -133,6 +136,19 @@ public class Advisor_Details extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+
+    public void updateUserSelectedAdvisor(User user, String advisorId) {
+        user.setAdvisorId(advisorId);
+        db.collection("users").document(user.getUserId()).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Toast.makeText(Advisor_Details.this, "Hired Successfully.",
+                        Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
     }
 }
 
