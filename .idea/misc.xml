@@ -17,10 +17,13 @@
         <entry key="..\:/Freelancing/Traveling-App/tour-app/app/src/main/res/drawable/ic_baseline_location_on_24.xml" value="0.2345" />
         <entry key="..\:/Freelancing/Traveling-App/tour-app/app/src/main/res/drawable/ic_outline_location_on_24.xml" value="0.153" />
         <entry key="..\:/Freelancing/Traveling-App/tour-app/app/src/main/res/layout/activity_advisor_details.xml" value="0.2171875" />
-        <entry key="..\:/Freelancing/Traveling-App/tour-app/app/src/main/res/layout/activity_hotel_book.xml" value="0.25" />
+        <entry key="..\:/Freelancing/Traveling-App/tour-app/app/src/main/res/layout/activity_cab_booking.xml" value="0.24365942028985507" />
+        <entry key="..\:/Freelancing/Traveling-App/tour-app/app/src/main/res/layout/activity_hotel_book.xml" value="0.33" />
         <entry key="..\:/Freelancing/Traveling-App/tour-app/app/src/main/res/layout/activity_hotel_details.xml" value="0.33" />
         <entry key="..\:/Freelancing/Traveling-App/tour-app/app/src/main/res/layout/activity_login.xml" value="0.371875" />
         <entry key="..\:/Freelancing/Traveling-App/tour-app/app/src/main/res/layout/activity_main.xml" value="0.18085106382978725" />
+        <entry key="..\:/Freelancing/Traveling-App/tour-app/app/src/main/res/layout/activity_table_book.xml" value="0.25" />
+        <entry key="..\:/Freelancing/Traveling-App/tour-app/app/src/main/res/layout/activity_table_details.xml" value="0.33" />
         <entry key="..\:/Freelancing/Traveling-App/tour-app/app/src/main/res/layout/advisor_detail.xml" value="0.37083333333333335" />
         <entry key="..\:/Freelancing/Traveling-App/tour-app/app/src/main/res/layout/advisor_list.xml" value="0.25" />
         <entry key="..\:/Freelancing/Traveling-App/tour-app/app/src/main/res/layout/cab_details.xml" value="0.25" />
