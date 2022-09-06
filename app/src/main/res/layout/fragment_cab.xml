@@ -44,10 +44,12 @@
 
         </LinearLayout>
 
-        <ListView
+        <GridView
             android:id="@+id/cabListView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:numColumns="2"
+            android:layout_gravity="center"
             tools:listitem="@layout/cab_list" />
     </LinearLayout>
 

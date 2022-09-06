@@ -71,7 +71,7 @@ public class HotelListAdapter extends BaseAdapter {
 
         holder.lblHotelName.setText(hotel.getHotelName());
         holder.lblLocation.setText(hotel.getLocation());
-        holder.lblPrice.setText(hotel.getPrice().toString());
+        holder.lblPrice.setText("LKR "+hotel.getPrice().toString());
         Picasso.get().load(hotel.getImageUrl()).into(holder.imageView);
         return row;
     }

@@ -1,18 +1,27 @@
 package lk.proj.tourapp.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+import android.widget.Button;
+import android.widget.GridView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
 import lk.proj.tourapp.R;
 import lk.proj.tourapp.adapter.Cab;
 import lk.proj.tourapp.adapter.CabListAdapter;
+import lk.proj.tourapp.adapter.Hotel;
 
 import java.util.ArrayList;
 
@@ -22,6 +31,9 @@ import java.util.ArrayList;
  * create an instance of this fragment.
  */
 public class CabFragment extends Fragment {
+    private FirebaseFirestore db;
+    private GridView gridView;
+    Button btnSearch;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,6 +73,7 @@ public class CabFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        db = FirebaseFirestore.getInstance();
     }
 
     @Override
@@ -73,21 +86,40 @@ public class CabFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ArrayList<Cab> advisorArrayList= new ArrayList<>();
-        int[] image={R.drawable.sample_car,R.drawable.sample_car,
-                R.drawable.sample_car,R.drawable.sample_car,R.drawable.sample_car,
-                R.drawable.sample_car,R.drawable.sample_car};
-        String[] name ={"Driver : Vin Diesel","Driver : Vin Diesel","Driver : Vin Diesel",
-                "Driver : Vin Diesel","Driver : Vin Diesel","Driver : Vin Diesel","Driver : Vin Diesel"};
-        String[] emails={"+94789632544","+94789632544",
-                "+94789632544","+94789632544","+94789632544",
-                "+94789632544","+94789632544"};
-        for(int i=0;i<image.length;i++){
-            Cab advisor=new Cab(name[i],emails[i],image[i]);
-            advisorArrayList.add(advisor);
-        }
-        ListView viewById = (ListView) view.findViewById(R.id.cabListView);
-        CabListAdapter ad= new CabListAdapter(getActivity(),R.layout.cab_list,advisorArrayList);
-        viewById.setAdapter(ad);
+        ArrayList<Cab> cabList= new ArrayList<>();
+        CabListAdapter adapter= new CabListAdapter(getActivity(),R.layout.cab_list,cabList);
+        gridView = (GridView) view.findViewById(R.id.cabListView);
+        gridView.setAdapter(adapter);
+
+        btnSearch =  view.findViewById(R.id.btnSearchCabs);
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                db.collection("drivers").get()
+                        .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    for (QueryDocumentSnapshot document : task.getResult()) {
+                                        Cab hotel = new Cab();
+                                        hotel.setDriverId(document.getId());
+                                        hotel.setDriverName(document.getData().get("driverName").toString());
+                                        hotel.setContactNo(document.getData().get("contactNo").toString());
+                                        hotel.setEmail(document.getData().get("email").toString());
+                                        hotel.setImageUrl(document.getData().get("imageUrl").toString());
+                                        hotel.setVehicleType(document.getData().get("vehicleType").toString());
+                                        cabList.add(hotel);
+                                    }
+                                    adapter.notifyDataSetChanged();
+                                } else {
+                                    Log.w("TAG", "Error getting documents.", task.getException());
+                                }
+                            }
+                        });
+
+            }
+        });
     }
 }

@@ -4,47 +4,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:layout_marginTop="16dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginVertical="16dp"
-            android:orientation="horizontal">
+            android:minHeight="200dp"
+            android:orientation="vertical"
+            android:padding="25dp">
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/cabProPic"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:layout_marginStart="20dp"
-                android:src="@drawable/hotel_sample"/>
+                android:layout_gravity="center"
+                android:src="@drawable/hotel_sample" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_gravity="center"
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/driverName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:width="150dp"
+                    android:text="Name"
+                    android:textAlignment="center"
                     android:textColor="@color/black"
-                    android:textSize="24sp"/>
+                    android:textSize="24sp" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/contactNo"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:id="@+id/contactNo"/>
+                    android:text="Contact No"
+                    android:textAlignment="center" />
+
+                <ImageView
+                    android:id="@+id/cabVehicleType"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:src="@drawable/ic_baseline_directions_car_24" />
 
             </LinearLayout>
 
         </LinearLayout>
 
-    </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
 
 
 </LinearLayout>

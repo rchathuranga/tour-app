@@ -5,7 +5,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import lk.proj.tourapp.R;
 
@@ -16,28 +19,29 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class CabListAdapter extends BaseAdapter {
     private Context context;
     private int layout;
-    private ArrayList<Cab> ongoingslist;
+    private ArrayList<Cab> cabArrayList;
 
-    public CabListAdapter(Context context, int layout, ArrayList<Cab> ongoingslist) {
+    public CabListAdapter(Context context, int layout, ArrayList<Cab> cabArrayList) {
         this.context = context;
         this.layout = layout;
-        this.ongoingslist = ongoingslist;
+        this.cabArrayList = cabArrayList;
     }
 
 
-    private class ViewHolder{
+    private class ViewHolder {
         TextView driverName, contactNo;
-        CircleImageView imageView;
+        CircleImageView imgDriver;
+        ImageView imgVehicleType;
     }
 
     @Override
     public int getCount() {
-        return ongoingslist.size();
+        return cabArrayList.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return ongoingslist.get(i);
+        return cabArrayList.get(i);
     }
 
     @Override
@@ -52,24 +56,31 @@ public class CabListAdapter extends BaseAdapter {
         ViewHolder holder = new ViewHolder();
 
 
-        if(row == null){
+        if (row == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row = inflater.inflate(layout,null);
+            row = inflater.inflate(layout, null);
 
             holder.driverName = (TextView) row.findViewById(R.id.driverName);
             holder.contactNo = (TextView) row.findViewById(R.id.contactNo);
-            holder.imageView = (CircleImageView) row.findViewById(R.id.cabProPic);
+            holder.imgDriver = (CircleImageView) row.findViewById(R.id.cabProPic);
+            holder.imgVehicleType = (ImageView) row.findViewById(R.id.cabVehicleType);
             row.setTag(holder);
 
-        }else {
+        } else {
             holder = (ViewHolder) row.getTag();
         }
 
-        Cab ongoing = ongoingslist.get(position);
+        Cab ongoing = cabArrayList.get(position);
 
-        holder.driverName.setText(ongoing.driverName);
-        holder.contactNo.setText(ongoing.contactNo);
-        holder.imageView.setImageResource(ongoing.image);
+        holder.driverName.setText(ongoing.getDriverName());
+        holder.contactNo.setText(ongoing.getContactNo());
+        Picasso.get().load(ongoing.getImageUrl()).into(holder.imgDriver);
+        holder.imgVehicleType.setImageResource(
+                (ongoing.getVehicleType().equalsIgnoreCase("CAR"))
+                        ? R.drawable.ic_baseline_directions_car_24
+                        : (ongoing.getVehicleType().equalsIgnoreCase("VAN"))
+                        ? R.drawable.ic_baseline_directions_car_24
+                        : R.drawable.ic_baseline_directions_car_24);
         return row;
     }
 }
