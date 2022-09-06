@@ -16,16 +16,15 @@
         android:layout_width="match_parent"
         android:layout_height="350dp"
         android:orientation="vertical">
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/advisorProPic"
             android:layout_marginTop="35dp"
             android:layout_gravity="center_horizontal"
-            android:layout_width="140dp"
-            android:layout_height="140dp"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:src="@drawable/test_advisor"/>
         <TextView
             android:id="@+id/adviserDetailsNameText"
-            android:layout_marginTop="30dp"
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

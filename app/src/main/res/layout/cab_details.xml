@@ -1,35 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
-    tools:context=".Hotel_Details"
     android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="405dp">
 
         <LinearLayout
-            android:background="@drawable/graditanbackforhotel"
             android:layout_width="match_parent"
             android:layout_height="350dp"
+            android:background="@drawable/gradiantbackground"
             android:orientation="vertical">
-            <TextView
-                android:id="@+id/hotelDetailsNameText"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Hotel Name"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="27dp"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/hotel"/>
 
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/advisorProPic"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="35dp"
+                android:src="@drawable/test_advisor" />
+
+            <TextView
+                android:id="@+id/adviserDetailsNameText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Driver Name"
+                android:textColor="@color/white"
+                android:textSize="27dp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <androidx.cardview.widget.CardView
@@ -52,17 +54,18 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Available Rooms"
-                        android:textSize="15sp"
+                        android:text="Price"
+                        android:textSize="20sp"
                         android:textStyle="bold"/>
                     <TextView
+                        android:id="@+id/hiredCountText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="200"
-                        android:textSize="20sp"
+                        android:text="1Km: LKR 250.00"
+                        android:textSize="15sp"
                         android:textStyle="bold"
                         android:paddingTop="10dp"
-                        android:textColor="#B2C307"/>
+                        android:textColor="#009688"/>
                 </LinearLayout>
                 <LinearLayout
                     android:gravity="center"
@@ -74,12 +77,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Room Type"
-                        android:textSize="20sp"/>
+                        android:text="Vehicle Type"
+                        android:textSize="20sp"
+                        android:textStyle="bold"/>
                     <TextView
+                        android:id="@+id/goodReviesCoutTex"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Luxury"
+                        android:text="Car"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:paddingTop="10dp"
@@ -95,12 +100,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Ratings"
-                        android:textSize="20sp"/>
+                        android:text="Person Count"
+                        android:textSize="20sp"
+                        android:textStyle="bold"/>
                     <TextView
+                        android:id="@+id/badReviewsCoutText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="⭐⭐⭐"
+                        android:text="3"
                         android:textSize="20sp"
                         android:textStyle="bold"
                         android:paddingTop="10dp"
@@ -112,39 +119,32 @@
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
     <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="25dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="About"
+            android:textSize="15sp"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="dsdgsgdhgshdgshdghsdghsgdhgsdh
+                sddsdyusydusyduysdyusydusydusyduysduysudyus
+                ydusydsydsudsuydusyduysdu"/>
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="360dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center"
         android:layout_marginTop="25dp">
         <LinearLayout
-
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="25dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="About"
-                android:textSize="15sp"
-                android:textStyle="bold"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:paddingLeft="20dp"
-                android:text="dsdgsgdhgshdgshdghsdghsgdhgsdh
-                sddsdyusydusyduysdyusydusydusyduysduysudyus
-                ydusydsydsudsuydusyduysdu"/>
-        </LinearLayout>
-        <com.google.android.material.divider.MaterialDivider
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:dividerColor="#DADADA"/>
-        <LinearLayout
-            android:paddingTop="5dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -152,31 +152,16 @@
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="36dp"
-                android:src="@drawable/ic_outline_location_on_24"/>
+                android:src="@drawable/ic_baseline_mail_24"/>
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:paddingLeft="20dp"
-                android:text="Colombo , Sri Lanka"/>
-        </LinearLayout>
-        <LinearLayout
-            android:paddingTop="5dp"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="25dp">
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="36dp"
-                android:src="@drawable/outline_mail_24"/>
-            <TextView
+                android:id="@+id/advisorGmailText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="20dp"
                 android:text="GMAIL"/>
         </LinearLayout>
+
         <LinearLayout
             android:paddingTop="5dp"
             android:orientation="horizontal"
@@ -186,8 +171,9 @@
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="36dp"
-                android:src="@drawable/outline_call_24"/>
+                android:src="@drawable/ic_baseline_call_24"/>
             <TextView
+                android:id="@+id/advisorContactNoText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -196,7 +182,7 @@
         </LinearLayout>
     </LinearLayout>
     <Button
-        android:id="@+id/hotelBookButton"
+        android:id="@+id/advisorHireButton"
         android:background="@drawable/buttonstyler"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -204,4 +190,5 @@
         android:layout_marginTop="20dp"
         android:text="Book Now"
         />
+
 </LinearLayout>

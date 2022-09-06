@@ -45,19 +45,19 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Booked Adivosr"
+                    android:text="Booked"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Booked Adivosr"
+                    android:text="Ravindu Chathuranga"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Booked Adivosr"
+                    android:text="+961754659821"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 
@@ -92,7 +92,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Booked Hotel"
+                    android:text="Booked"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
                 <TextView
