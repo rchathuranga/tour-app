@@ -4,31 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Hotel_Details"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".Hotel_Details">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="405dp">
 
         <LinearLayout
-            android:background="@drawable/graditanbackforhotel"
             android:layout_width="match_parent"
             android:layout_height="350dp"
+            android:background="@drawable/graditanbackforhotel"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/hotelDetailsNameText"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="center_horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
                 android:text="Hotel Name"
                 android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="27dp"/>
+                android:textSize="27dp"
+                android:textStyle="bold" />
+
             <ImageView
+                android:id="@+id/imgHotelImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/hotel"/>
+                android:src="@drawable/hotel" />
 
         </LinearLayout>
 
@@ -37,171 +41,199 @@
             android:layout_height="120dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="275dp">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:weightSum="3">
+
                 <LinearLayout
-                    android:gravity="center"
-                    android:orientation="vertical"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Available Rooms"
                         android:textSize="15sp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
+
                     <TextView
+                        android:id="@+id/lblAvailableRoom"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="200"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
                         android:paddingTop="10dp"
-                        android:textColor="#B2C307"/>
+                        android:text="200"
+                        android:textColor="#B2C307"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
+
                 <LinearLayout
-                    android:gravity="center"
-                    android:orientation="vertical"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Room Type"
-                        android:textSize="20sp"/>
+                        android:textSize="20sp" />
+
                     <TextView
+                        android:id="@+id/lblRoomType"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Luxury"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
                         android:paddingTop="10dp"
-                        android:textColor="#FF0397C5"/>
+                        android:text="Luxury"
+                        android:textColor="#FF0397C5"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
+
                 <LinearLayout
-                    android:gravity="center"
-                    android:orientation="vertical"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Ratings"
-                        android:textSize="20sp"/>
+                        android:textSize="20sp" />
+
                     <TextView
+                        android:id="@+id/lblRating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="⭐⭐⭐"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
                         android:paddingTop="10dp"
-                        android:textColor="#CA0819"/>
+                        android:text="⭐⭐⭐"
+                        android:textColor="#CA0819"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
+
     <LinearLayout
         android:layout_width="360dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_gravity="center"
-        android:layout_marginTop="25dp">
+        android:layout_marginTop="25dp"
+        android:orientation="vertical">
+
         <LinearLayout
 
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:paddingLeft="25dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="About"
                 android:textSize="15sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
+
             <TextView
+                android:id="@+id/lblDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="20dp"
                 android:text="dsdgsgdhgshdgshdghsdghsgdhgsdh
                 sddsdyusydusyduysdyusydusydusyduysduysudyus
-                ydusydsydsudsuydusyduysdu"/>
+                ydusydsydsudsuydusyduysdu" />
         </LinearLayout>
+
         <com.google.android.material.divider.MaterialDivider
-            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            app:dividerColor="#DADADA"/>
+            android:layout_marginTop="10dp"
+            app:dividerColor="#DADADA" />
+
         <LinearLayout
-            android:paddingTop="5dp"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="25dp">
+            android:orientation="horizontal"
+            android:paddingLeft="25dp"
+            android:paddingTop="5dp">
+
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="36dp"
-                android:src="@drawable/ic_outline_location_on_24"/>
+                android:src="@drawable/ic_outline_location_on_24" />
+
             <TextView
+                android:id="@+id/lblLocation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="20dp"
-                android:text="Colombo , Sri Lanka"/>
+                android:text="Colombo , Sri Lanka" />
         </LinearLayout>
+
         <LinearLayout
-            android:paddingTop="5dp"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="25dp">
+            android:orientation="horizontal"
+            android:paddingLeft="25dp"
+            android:paddingTop="5dp">
+
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="36dp"
-                android:src="@drawable/outline_mail_24"/>
+                android:src="@drawable/outline_mail_24" />
+
             <TextView
+                android:id="@+id/lblEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="20dp"
-                android:text="GMAIL"/>
+                android:text="GMAIL" />
         </LinearLayout>
+
         <LinearLayout
-            android:paddingTop="5dp"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="25dp">
+            android:orientation="horizontal"
+            android:paddingLeft="25dp"
+            android:paddingTop="5dp">
+
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="36dp"
-                android:src="@drawable/outline_call_24"/>
+                android:src="@drawable/outline_call_24" />
+
             <TextView
+                android:id="@+id/lblContact"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:paddingLeft="20dp"
-                android:text="+96511455554585"/>
+                android:text="+96511455554585" />
         </LinearLayout>
     </LinearLayout>
+
     <Button
         android:id="@+id/hotelBookButton"
-        android:background="@drawable/buttonstyler"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="20dp"
-        android:text="Book Now"
-        />
+        android:background="@drawable/buttonstyler"
+        android:text="Book Now" />
 </LinearLayout>

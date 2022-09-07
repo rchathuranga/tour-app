@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.button.MaterialButton;
 import com.squareup.picasso.Picasso;
 
 import lk.proj.tourapp.R;
@@ -26,8 +27,9 @@ public class HotelListAdapter extends BaseAdapter {
     }
 
 
-    private class ViewHolder{
+    private class ViewHolder {
         TextView lblHotelName, lblLocation, lblPrice;
+        MaterialButton btnMoreInfo, btnBookNow;
         ImageView imageView;
     }
 
@@ -53,17 +55,19 @@ public class HotelListAdapter extends BaseAdapter {
         ViewHolder holder = new ViewHolder();
 
 
-        if(row == null){
+        if (row == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row = inflater.inflate(layout,null);
+            row = inflater.inflate(layout, null);
 
             holder.lblHotelName = (TextView) row.findViewById(R.id.hotelName);
             holder.lblLocation = (TextView) row.findViewById(R.id.location);
             holder.lblPrice = (TextView) row.findViewById(R.id.hotelPrice);
             holder.imageView = (ImageView) row.findViewById(R.id.hotelProPic);
+            holder.btnBookNow = row.findViewById(R.id.btnBookNow);
+            holder.btnMoreInfo = row.findViewById(R.id.btnMoreInfo);
             row.setTag(holder);
 
-        }else {
+        } else {
             holder = (ViewHolder) row.getTag();
         }
 
@@ -71,8 +75,12 @@ public class HotelListAdapter extends BaseAdapter {
 
         holder.lblHotelName.setText(hotel.getHotelName());
         holder.lblLocation.setText(hotel.getLocation());
-        holder.lblPrice.setText("LKR "+hotel.getPrice().toString());
+        holder.lblPrice.setText("LKR " + hotel.getPrice().toString());
         Picasso.get().load(hotel.getImageUrl()).into(holder.imageView);
+
+        holder.btnMoreInfo.setOnClickListener(hotel.getBtnMoreInfoClickEvent());
+        holder.btnBookNow.setOnClickListener(hotel.getBtnBookNowClickEvent());
+
         return row;
     }
 }

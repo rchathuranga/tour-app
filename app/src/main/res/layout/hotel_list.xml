@@ -72,13 +72,14 @@
                     android:orientation="vertical">
 
                     <com.google.android.material.button.MaterialButton
-                        android:id="@+id/moreInfoId"
+                        android:id="@+id/btnMoreInfo"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:text="More Info" />
 
                     <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnBookNow"
                         android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:text="Book Now" />
