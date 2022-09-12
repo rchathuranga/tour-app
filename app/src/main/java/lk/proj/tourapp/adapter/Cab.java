@@ -1,6 +1,8 @@
 package lk.proj.tourapp.adapter;
 
-public class Cab {
+import java.io.Serializable;
+
+public class Cab implements Serializable {
     private String driverId;
     private String driverName;
     private String contactNo;

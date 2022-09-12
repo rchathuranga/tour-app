@@ -57,7 +57,6 @@ public class AdvisorFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         db = FirebaseFirestore.getInstance();
-
         user = (User) requireActivity().getIntent().getSerializableExtra("user");
 
         if (getArguments() != null) {
@@ -102,6 +101,7 @@ public class AdvisorFragment extends Fragment {
                                 advisor.setHiredCount(Integer.parseInt(document.getData().get("hiredCount").toString()));
                                 advisor.setImg(document.getData().get("imageUrl").toString());
                                 advisor.setEmail(document.getData().get("email").toString());
+                                advisor.setExperience(document.getData().get("experience").toString());
                                 advisorList.add(advisor);
 
                                 ad.notifyDataSetChanged();

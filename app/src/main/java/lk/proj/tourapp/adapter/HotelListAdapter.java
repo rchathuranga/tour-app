@@ -12,20 +12,23 @@ import com.google.android.material.button.MaterialButton;
 import com.squareup.picasso.Picasso;
 
 import lk.proj.tourapp.R;
+import lk.proj.tourapp.dto.User;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class HotelListAdapter extends BaseAdapter {
     private Context context;
     private int layout;
     private ArrayList<Hotel> hotelList;
+    private User user;
 
-    public HotelListAdapter(Context context, int layout, ArrayList<Hotel> hotelList) {
+    public HotelListAdapter(Context context, int layout, ArrayList<Hotel> hotelList, User user) {
         this.context = context;
         this.layout = layout;
         this.hotelList = hotelList;
+        this.user = user;
     }
-
 
     private class ViewHolder {
         TextView lblHotelName, lblLocation, lblPrice;
@@ -80,6 +83,7 @@ public class HotelListAdapter extends BaseAdapter {
 
         holder.btnMoreInfo.setOnClickListener(hotel.getBtnMoreInfoClickEvent());
         holder.btnBookNow.setOnClickListener(hotel.getBtnBookNowClickEvent());
+        holder.btnBookNow.setEnabled(!(Objects.equals(user.getHotelId(), hotel.getHotelId())));
 
         return row;
     }

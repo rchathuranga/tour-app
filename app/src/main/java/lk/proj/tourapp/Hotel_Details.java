@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.util.Objects;
+
 import lk.proj.tourapp.adapter.Hotel;
 import lk.proj.tourapp.databinding.ActivityAdvisorDetailsBinding;
 import lk.proj.tourapp.databinding.ActivityHotelDetailsBinding;
@@ -72,6 +74,10 @@ public class Hotel_Details extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        if (Objects.equals(user.getHotelId(), hotel.getHotelId())) {
+            bookButton.setEnabled(false);
+        }
     }
 
     @Override

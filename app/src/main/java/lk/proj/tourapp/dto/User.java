@@ -8,6 +8,8 @@ public class User implements Serializable {
     private String contactNo;
     private String email;
     private String advisorId;
+    private String hotelId;
+    private String cabId;
 
     public String getUserId() {
         return userId;
@@ -44,6 +46,20 @@ public class User implements Serializable {
         this.advisorId = advisorId;
     }
 
+    public String getHotelId() {
+        return hotelId;
+    }
+    public void setHotelId(String hotelId) {
+        this.hotelId = hotelId;
+    }
+
+    public String getCabId() {
+        return cabId;
+    }
+    public void setCabId(String cabId) {
+        this.cabId = cabId;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -51,6 +67,9 @@ public class User implements Serializable {
                 ", name='" + name + '\'' +
                 ", contactNo='" + contactNo + '\'' +
                 ", email='" + email + '\'' +
+                ", advisorId='" + advisorId + '\'' +
+                ", hotelId='" + hotelId + '\'' +
+                ", cabId='" + cabId + '\'' +
                 '}';
     }
 }

@@ -32,7 +32,7 @@ public class AdvisorListAdapter extends BaseAdapter{
 
 
     private class ViewHolder{
-        TextView name,email;
+        TextView name,email, experience;
         CircleImageView imageView;
     }
 
@@ -63,6 +63,7 @@ public class AdvisorListAdapter extends BaseAdapter{
 
             holder.name = (TextView) row.findViewById(R.id.advisorName);
             holder.email= (TextView) row.findViewById(R.id.advisorsEmail);
+            holder.experience= (TextView) row.findViewById(R.id.advisorExperience);
             holder.imageView = (CircleImageView) row.findViewById(R.id.advisorProPic);
             row.setTag(holder);
 
@@ -74,6 +75,7 @@ public class AdvisorListAdapter extends BaseAdapter{
 
         holder.name.setText(ongoing.name);
         holder.email.setText(ongoing.contact);
+        holder.experience.setText(ongoing.getExperience());
         Picasso.get().load(ongoing.img).into(holder.imageView);
 
         return row;

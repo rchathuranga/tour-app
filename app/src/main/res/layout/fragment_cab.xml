@@ -47,10 +47,16 @@
         <GridView
             android:id="@+id/cabListView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:numColumns="2"
+            android:layout_height="297dp"
             android:layout_gravity="center"
+            android:numColumns="2"
             tools:listitem="@layout/cab_list" />
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            tools:ignore="SpeakableTextPresentCheck" />
     </LinearLayout>
 
 

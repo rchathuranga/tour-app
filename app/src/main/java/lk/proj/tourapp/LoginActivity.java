@@ -95,13 +95,14 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                System.out.println("User = >" + document.getId());
-                                System.out.println("User = >" + document.getData());
                                 User myUser = new User();
                                 myUser.setUserId(user.getUid());
                                 myUser.setName(document.getData().get("name").toString());
-//                                myUser.setContactNo(document.getData().get("contactNo").toString());
-//                                myUser.setEmail(document.getData().get("email").toString());
+                                myUser.setContactNo(document.getData().get("contactNo").toString());
+                                myUser.setEmail(document.getData().get("email").toString());
+                                myUser.setAdvisorId(document.getData().get("advisorId").toString());
+                                myUser.setHotelId(document.getData().get("hotelId").toString());
+                                myUser.setCabId(document.getData().get("cabId").toString());
 
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 intent.putExtra("user", myUser);

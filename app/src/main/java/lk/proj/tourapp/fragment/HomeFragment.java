@@ -1,13 +1,34 @@
 package lk.proj.tourapp.fragment;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
+
+import lk.proj.tourapp.Advisor_Details;
+import lk.proj.tourapp.Hotel_Details;
 import lk.proj.tourapp.R;
+import lk.proj.tourapp.adapter.Advisor;
+import lk.proj.tourapp.adapter.Hotel;
+import lk.proj.tourapp.dto.User;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -15,34 +36,29 @@ import lk.proj.tourapp.R;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
+    private User user;
+    private FirebaseFirestore db;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    ImageView homeAdvisorImg;
+    TextView lblHomeAdvisorName;
+    TextView lblNoAdvisor;
+    TextView lblHomeAdvisorContact;
+    MaterialButton btnHomeAdvisorInfo;
+    
+    ImageView imgHomeHotelImage;
+    TextView lblHomeHotelName;
+    TextView lblHomeHotelRating;
+    TextView lblHomeHotelLocation;
+    TextView lblHomeHotelContact;
+    MaterialButton btnHomeHotelInfo;
 
     public HomeFragment() {
-        // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static HomeFragment newInstance(String param1, String param2) {
         HomeFragment fragment = new HomeFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -50,10 +66,9 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
+        db = FirebaseFirestore.getInstance();
+        user = (User) requireActivity().getIntent().getSerializableExtra("user");
     }
 
     @Override
@@ -61,5 +76,136 @@ public class HomeFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false);
+    }
+
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        homeAdvisorImg = view.findViewById(R.id.homeAdvisorImg);
+        lblHomeAdvisorName = view.findViewById(R.id.lblHomeAdvisorName);
+        lblNoAdvisor = view.findViewById(R.id.lblNoAdvisor);
+        lblHomeAdvisorContact = view.findViewById(R.id.lblHomeAdvisorContact);
+        btnHomeAdvisorInfo = view.findViewById(R.id.btnHomeAdvisorInfo);
+
+        imgHomeHotelImage = view.findViewById(R.id.imgHomeHotelImage);
+        lblHomeHotelName = view.findViewById(R.id.lblHomeHotelName);
+        lblHomeHotelRating = view.findViewById(R.id.lblHomeHotelRating);
+        lblHomeHotelLocation = view.findViewById(R.id.lblHomeHotelLocation);
+        lblHomeHotelContact = view.findViewById(R.id.lblHomeHotelContact);
+        btnHomeHotelInfo = view.findViewById(R.id.btnHomeHotelInfo);
+
+        System.out.println("user "+ user);
+        loadAdvisorData();
+        loadHotelData();
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void loadAdvisorData() {
+        if (user.getAdvisorId().isEmpty()) {
+            lblNoAdvisor.setText("No Advisor Selected");
+            lblNoAdvisor.setVisibility(View.VISIBLE);
+            lblHomeAdvisorName.setVisibility(View.INVISIBLE);
+            lblHomeAdvisorContact.setVisibility(View.INVISIBLE);
+            btnHomeAdvisorInfo.setText("Hire");
+        }else {
+            db.collection("advisors").document(user.getAdvisorId()).get()
+                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                Advisor advisor = new Advisor();
+                                DocumentSnapshot document = task.getResult();
+                                advisor.setId(document.getId());
+                                advisor.setName(document.getData().get("name").toString());
+                                advisor.setContact(document.getData().get("contactNo").toString());
+                                advisor.setBadReviews(Integer.parseInt(document.getData().get("badReview").toString()));
+                                advisor.setGoodReviews(Integer.parseInt(document.getData().get("goodReview").toString()));
+                                advisor.setHiredCount(Integer.parseInt(document.getData().get("hiredCount").toString()));
+                                advisor.setImg(document.getData().get("imageUrl").toString());
+                                advisor.setEmail(document.getData().get("email").toString());
+
+
+                                lblHomeAdvisorName.setText(advisor.getName());
+                                lblHomeAdvisorContact.setText(advisor.getContact());
+                                Picasso.get().load(advisor.getImg()).into(homeAdvisorImg);
+
+                                btnHomeAdvisorInfo.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Intent intent = new Intent(getActivity(), Advisor_Details.class);
+                                        intent.putExtra("advisorId",advisor.getId());
+                                        intent.putExtra("user", user);
+                                        startActivity(intent);
+                                    }
+                                });
+                            }
+                        }
+                    });
+        }
+    }
+
+    public void loadHotelData() {
+        if (user.getHotelId().isEmpty()) {
+            lblHomeHotelLocation.setText("No Hotel Booked");
+            lblHomeHotelLocation.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            lblHomeHotelRating.setVisibility(View.GONE);
+            lblHomeHotelContact.setVisibility(View.GONE);
+            btnHomeHotelInfo.setText("Book a Hotel");
+            btnHomeHotelInfo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+//                    FragmentManager fm = getFragmentManager();
+//                    FragmentTransaction fragmentTransaction = fm.beginTransaction();
+//                    fragmentTransaction.replace(R.id.fragmentHome, new HotelFragment());
+//                    fragmentTransaction.commit();
+                }
+            });
+        }else {
+            db.collection("hotel").document(user.getHotelId()).get()
+                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+
+                                Hotel hotel = new Hotel();
+
+                                hotel.setHotelId(document.getId());
+                                hotel.setHotelName(document.getData().get("name").toString());
+                                hotel.setAvailableRooms(Integer.parseInt(document.getData().get("availableRoom").toString()));
+                                hotel.setRoomTypes(document.getData().get("roomType").toString());
+                                hotel.setRating(document.getData().get("rating").toString());
+                                hotel.setDescription(document.getData().get("description").toString());
+                                hotel.setContactNo(document.getData().get("contactNo").toString());
+                                hotel.setEmail(document.getData().get("email").toString());
+                                hotel.setImageUrl(document.getData().get("imageUrl").toString());
+                                hotel.setLocation(document.getData().get("location").toString());
+                                hotel.setPrice(Double.valueOf(document.getData().get("price").toString()));
+
+
+                                Picasso.get().load(hotel.getImageUrl()).into(imgHomeHotelImage);
+                                imgHomeHotelImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                                lblHomeHotelName.setText(hotel.getHotelName());
+                                lblHomeHotelRating.setText(hotel.getRating());
+                                lblHomeHotelLocation.setText(hotel.getLocation());
+                                lblHomeHotelLocation.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
+                                lblHomeHotelContact.setText(hotel.getContactNo());
+
+                                btnHomeHotelInfo.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Intent intent = new Intent(getActivity(), Hotel_Details.class);
+                                        hotel.setBtnMoreInfoClickEvent(null);
+                                        hotel.setBtnBookNowClickEvent(null);
+                                        intent.putExtra("hotel", hotel);
+                                        intent.putExtra("user", user);
+                                        startActivity(intent);
+                                    }
+                                });
+                            }
+                        }
+                    });
+        }
     }
 }

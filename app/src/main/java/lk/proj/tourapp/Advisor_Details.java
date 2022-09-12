@@ -22,6 +22,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
+import java.util.Objects;
+
 import lk.proj.tourapp.adapter.Advisor;
 import lk.proj.tourapp.databinding.ActivityAdvisorDetailsBinding;
 import lk.proj.tourapp.dto.User;
@@ -79,6 +81,10 @@ public class Advisor_Details extends AppCompatActivity {
                 updateUserSelectedAdvisor(user, advisorId);
             }
         });
+
+        if (Objects.equals(user.getAdvisorId(), advisorId)) {
+            hireButton.setEnabled(false);
+        }
     }
 
     @Override
@@ -96,21 +102,6 @@ public class Advisor_Details extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-    }
-
-    private void showAlert(String name) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("you hired " + name + " as your advisor")
-                .setCancelable(false)
-                .setNegativeButton("Ok", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                })
-                .setTitle("Success!")
-                .setIcon(R.drawable.ic_baseline_sentiment_satisfied_alt_24);
-        AlertDialog alert = builder.create();
-        alert.show();
     }
 
     private void getAdvisors(String id) {

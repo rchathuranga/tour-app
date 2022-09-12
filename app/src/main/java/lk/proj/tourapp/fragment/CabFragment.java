@@ -1,10 +1,12 @@
 package lk.proj.tourapp.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 
@@ -18,6 +20,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import lk.proj.tourapp.Advisor_Details;
+import lk.proj.tourapp.Cab_Booking;
 import lk.proj.tourapp.R;
 import lk.proj.tourapp.adapter.Cab;
 import lk.proj.tourapp.adapter.CabListAdapter;
@@ -86,12 +90,12 @@ public class CabFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ArrayList<Cab> cabList= new ArrayList<>();
-        CabListAdapter adapter= new CabListAdapter(getActivity(),R.layout.cab_list,cabList);
+        ArrayList<Cab> cabList = new ArrayList<>();
+        CabListAdapter adapter = new CabListAdapter(getActivity(), R.layout.cab_list, cabList);
         gridView = (GridView) view.findViewById(R.id.cabListView);
         gridView.setAdapter(adapter);
 
-        btnSearch =  view.findViewById(R.id.btnSearchCabs);
+        btnSearch = view.findViewById(R.id.btnSearchCabs);
 
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,6 +123,18 @@ public class CabFragment extends Fragment {
                             }
                         });
 
+            }
+        });
+
+        gridView.setClickable(true);
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getActivity(), Cab_Booking.class);
+//                intent.putExtra("user", user);
+                intent.putExtra("cab", cabList.get(i));
+                System.out.println(cabList.get(i));
+                startActivity(intent);
             }
         });
     }

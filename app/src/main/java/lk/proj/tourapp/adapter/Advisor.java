@@ -1,18 +1,19 @@
 package lk.proj.tourapp.adapter;
 
 public class Advisor {
-    String id,name,email, contact,img;
+    String id,name,email, contact,img, experience;
     int hiredCount,badReviews,goodReviews;
 
     public Advisor() {
     }
 
-    public Advisor(String id, String name, String email, String contact, String img, int hiredCount, int badReviews, int goodReviews) {
+    public Advisor(String id, String name, String email, String contact, String img, String experience, int hiredCount, int badReviews, int goodReviews) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.contact = contact;
         this.img = img;
+        this.experience = experience;
         this.hiredCount = hiredCount;
         this.badReviews = badReviews;
         this.goodReviews = goodReviews;
@@ -80,6 +81,13 @@ public class Advisor {
 
     public void setGoodReviews(int goodReviews) {
         this.goodReviews = goodReviews;
+    }
+
+    public String getExperience() {
+        return experience;
+    }
+    public void setExperience(String experience) {
+        this.experience = experience;
     }
 }
 

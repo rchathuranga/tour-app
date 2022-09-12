@@ -83,12 +83,12 @@ public class HotelFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        user = (User) requireActivity().getIntent().getSerializableExtra("user");
 
         ArrayList<Hotel> hotelArrayList = new ArrayList<>();
-        HotelListAdapter ad = new HotelListAdapter(getActivity(), R.layout.hotel_list, hotelArrayList);
+        HotelListAdapter ad = new HotelListAdapter(getActivity(), R.layout.hotel_list, hotelArrayList, user);
         listView.setAdapter(ad);
 
-        user = (User) requireActivity().getIntent().getSerializableExtra("user");
 
         db.collection("hotel").get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
