@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,6 +26,7 @@ import com.squareup.picasso.Picasso;
 
 import lk.proj.tourapp.Advisor_Details;
 import lk.proj.tourapp.Hotel_Details;
+import lk.proj.tourapp.ProfileActivity;
 import lk.proj.tourapp.R;
 import lk.proj.tourapp.adapter.Advisor;
 import lk.proj.tourapp.adapter.Hotel;
@@ -38,6 +40,9 @@ import lk.proj.tourapp.dto.User;
 public class HomeFragment extends Fragment {
     private User user;
     private FirebaseFirestore db;
+
+    TextView lblHomeUsername;
+    ImageButton btnHomeAccount;
 
     ImageView homeAdvisorImg;
     TextView lblHomeAdvisorName;
@@ -82,6 +87,10 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        lblHomeUsername = view.findViewById(R.id.lblHomeUsername);
+        btnHomeAccount = view.findViewById(R.id.btnHomeAccount);
+
         homeAdvisorImg = view.findViewById(R.id.homeAdvisorImg);
         lblHomeAdvisorName = view.findViewById(R.id.lblHomeAdvisorName);
         lblNoAdvisor = view.findViewById(R.id.lblNoAdvisor);
@@ -96,6 +105,17 @@ public class HomeFragment extends Fragment {
         btnHomeHotelInfo = view.findViewById(R.id.btnHomeHotelInfo);
 
         System.out.println("user "+ user);
+        lblHomeUsername.setText(user.getName());
+        btnHomeAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), ProfileActivity.class);
+                intent.putExtra("user", user);
+                startActivity(intent);
+            }
+        });
+
+
         loadAdvisorData();
         loadHotelData();
     }
