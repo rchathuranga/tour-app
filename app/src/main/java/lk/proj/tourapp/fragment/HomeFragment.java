@@ -29,6 +29,7 @@ import lk.proj.tourapp.Hotel_Details;
 import lk.proj.tourapp.ProfileActivity;
 import lk.proj.tourapp.R;
 import lk.proj.tourapp.adapter.Advisor;
+import lk.proj.tourapp.adapter.Cab;
 import lk.proj.tourapp.adapter.Hotel;
 import lk.proj.tourapp.dto.User;
 
@@ -56,6 +57,11 @@ public class HomeFragment extends Fragment {
     TextView lblHomeHotelLocation;
     TextView lblHomeHotelContact;
     MaterialButton btnHomeHotelInfo;
+
+    TextView lblHomeCabName;
+    TextView lblHomeCabContactNo;
+    ImageView imgHomeCabVehicleType;
+    ImageView imgHomeCabImage;
 
     public HomeFragment() {
     }
@@ -104,6 +110,11 @@ public class HomeFragment extends Fragment {
         lblHomeHotelContact = view.findViewById(R.id.lblHomeHotelContact);
         btnHomeHotelInfo = view.findViewById(R.id.btnHomeHotelInfo);
 
+        lblHomeCabName = view.findViewById(R.id.lblHomeCabName);
+        lblHomeCabContactNo = view.findViewById(R.id.lblHomeCabContactNo);
+        imgHomeCabVehicleType = view.findViewById(R.id.imgHomeCabVehicleType);
+        imgHomeCabImage = view.findViewById(R.id.imgHomeCabImage);
+
         System.out.println("user "+ user);
         lblHomeUsername.setText(user.getName());
         btnHomeAccount.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +129,7 @@ public class HomeFragment extends Fragment {
 
         loadAdvisorData();
         loadHotelData();
+        loadCabData();
     }
 
     @SuppressLint("SetTextI18n")
@@ -223,6 +235,50 @@ public class HomeFragment extends Fragment {
                                         startActivity(intent);
                                     }
                                 });
+                            }
+                        }
+                    });
+        }
+    }
+
+
+    public void loadCabData() {
+        if (user.getCabId().isEmpty()) {
+            lblHomeCabName.setText("");
+//            lblHomeHotelLocation.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            lblHomeCabContactNo.setText("No Cab Hired");
+            imgHomeCabVehicleType.setVisibility(View.GONE);
+//            btnHomeHotelInfo.setText("Book a Hotel");
+//            btnHomeHotelInfo.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    FragmentManager fm = getFragmentManager();
+//                    FragmentTransaction fragmentTransaction = fm.beginTransaction();
+//                    fragmentTransaction.replace(R.id.fragmentHome, new HotelFragment());
+//                    fragmentTransaction.commit();
+//                }
+//            });
+        }else {
+            db.collection("drivers").document(user.getCabId()).get()
+                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+
+                                Cab cab = new Cab();
+
+                                cab.setDriverId(document.getId());
+                                cab.setDriverName(document.getData().get("driverName").toString());
+                                cab.setVehicleType(document.getData().get("vehicleType").toString());
+                                cab.setContactNo(document.getData().get("contactNo").toString());
+                                cab.setEmail(document.getData().get("email").toString());
+                                cab.setImageUrl(document.getData().get("imageUrl").toString());
+
+
+                                Picasso.get().load(cab.getImageUrl()).into(imgHomeCabImage);
+                                lblHomeCabName.setText(cab.getDriverName());
+                                lblHomeCabContactNo.setText(cab.getContactNo());
                             }
                         }
                     });

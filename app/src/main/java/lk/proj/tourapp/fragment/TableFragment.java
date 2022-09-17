@@ -1,13 +1,33 @@
 package lk.proj.tourapp.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
+
+import lk.proj.tourapp.Hotel_Book;
+import lk.proj.tourapp.Hotel_Details;
 import lk.proj.tourapp.R;
+import lk.proj.tourapp.adapter.Hotel;
+import lk.proj.tourapp.adapter.HotelListAdapter;
+import lk.proj.tourapp.adapter.Table;
+import lk.proj.tourapp.adapter.TableListAdapter;
+import lk.proj.tourapp.dto.User;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +44,9 @@ public class TableFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private User user;
+    private ListView listView;
+    private FirebaseFirestore db;
 
     public TableFragment() {
         // Required empty public constructor
@@ -54,6 +77,7 @@ public class TableFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        db = FirebaseFirestore.getInstance();
     }
 
     @Override
@@ -61,5 +85,41 @@ public class TableFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_table, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        listView = (ListView) view.findViewById(R.id.tableListView);
+
+        user = (User) requireActivity().getIntent().getSerializableExtra("user");
+
+        ArrayList<Table> tableList = new ArrayList<>();
+        TableListAdapter ad = new TableListAdapter(getActivity(), R.layout.table_list, tableList, user);
+        listView.setAdapter(ad);
+
+        db.collection("resturants").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                Table table = new Table();
+
+                                table.setTableId(document.getId());
+                                table.setRestaurantName(document.getData().get("restaurantName").toString());
+                                table.setNoOfSeats(Integer.parseInt(document.getData().get("noOfSeats").toString()));
+                                table.setBookingPrice(Double.parseDouble(document.getData().get("bookingCharge").toString()));
+                                table.setImageUrl(document.getData().get("imageUrl").toString());
+                                table.setLocation(document.getData().get("location").toString());
+
+                                tableList.add(table);
+                                ad.notifyDataSetChanged();
+                            }
+                        } else {
+                            Log.w("TAG", "Error getting documents.", task.getException());
+                        }
+                    }
+                });
     }
 }

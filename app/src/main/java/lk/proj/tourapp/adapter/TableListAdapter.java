@@ -5,38 +5,42 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import de.hdodenhof.circleimageview.CircleImageView;
 import lk.proj.tourapp.R;
+import lk.proj.tourapp.dto.User;
 
 public class TableListAdapter extends BaseAdapter {
     private Context context;
     private int layout;
-    private ArrayList<Hotel> ongoingslist;
+    private ArrayList<Table> tableList;
+    private User user;
 
-    public TableListAdapter(Context context, int layout, ArrayList<Hotel> ongoingslist) {
+    public TableListAdapter(Context context, int layout, ArrayList<Table> tableList, User user) {
         this.context = context;
         this.layout = layout;
-        this.ongoingslist = ongoingslist;
+        this.tableList = tableList;
+        this.user = user;
     }
 
-
     private class ViewHolder{
-        TextView name, location;
-        CircleImageView imageView;
+        TextView lblRestaurantName, lblLocation, lblPrice;
+        ImageView imgRestaurantImage;
     }
 
     @Override
     public int getCount() {
-        return ongoingslist.size();
+        return tableList.size();
     }
 
     @Override
     public Object getItem(int i) {
-        return ongoingslist.get(i);
+        return tableList.get(i);
     }
 
     @Override
@@ -55,20 +59,22 @@ public class TableListAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = inflater.inflate(layout,null);
 
-//            holder.hotelName = (TextView) row.findViewById(R.id.hotelName);
-            holder.location = (TextView) row.findViewById(R.id.location);
-//            holder.imageView = (CircleImageView) row.findViewById(R.id.hotelProPic);
+            holder.lblRestaurantName = (TextView) row.findViewById(R.id.lblRestaurantName);
+            holder.lblLocation = (TextView) row.findViewById(R.id.lblTLocation);
+            holder.lblPrice = (TextView) row.findViewById(R.id.lblPrice);
+            holder.imgRestaurantImage = row.findViewById(R.id.imgRestaurantImage);
             row.setTag(holder);
 
         }else {
             holder = (ViewHolder) row.getTag();
         }
 
-        Hotel ongoing = ongoingslist.get(position);
+        Table table = tableList.get(position);
 
-//        holder.hotelName.setText(ongoing.hotelName);
-//        holder.location.setText(ongoing.location);
-//        holder.imageView.setImageResource(ongoing.hotelimage);
+        holder.lblRestaurantName.setText(table.getRestaurantName());
+        holder.lblLocation.setText(table.getLocation());
+        holder.lblPrice.setText(String.valueOf(table.getBookingPrice()));
+        Picasso.get().load(table.getImageUrl()).into(holder.imgRestaurantImage);
         return row;
     }
 }

@@ -292,7 +292,7 @@
                     android:layout_height="wrap_content"
                     android:minHeight="200dp"
                     android:orientation="vertical"
-                    android:padding="25dp">
+                    android:padding="10dp">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/imgHomeCabImage"
@@ -308,7 +308,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/imgHomeCabName"
+                            android:id="@+id/lblHomeCabName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:width="150dp"
@@ -318,7 +318,7 @@
                             android:textSize="24sp" />
 
                         <TextView
-                            android:id="@+id/imgHomeCabContactNo"
+                            android:id="@+id/lblHomeCabContactNo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"

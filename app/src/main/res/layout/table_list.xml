@@ -17,7 +17,7 @@
 
             <!-- Media -->
             <ImageView
-                android:id="@+id/hotelProPic"
+                android:id="@+id/imgRestaurantImage"
                 android:layout_width="match_parent"
                 android:layout_height="194dp"
                 android:scaleType="centerCrop"
@@ -29,24 +29,23 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal" >
                 <LinearLayout
-                    android:minWidth="220dp"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:padding="16dp">
 
                     <!-- Title, secondary and supporting text -->
                     <TextView
-                        android:id="@+id/hotelName"
+                        android:id="@+id/lblRestaurantName"
                         android:textSize="30sp"
                         android:textStyle="bold"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Resturant Name"
+                        android:text="Restaurant Name"
                         android:textAppearance="?attr/textAppearanceHeadline6"
                         />
                     <TextView
-                        android:id="@+id/location"
+                        android:id="@+id/lblTLocation"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Location"
@@ -55,7 +54,7 @@
                         android:textColor="?android:attr/textColorSecondary"
                         />
                     <TextView
-                        android:id="@+id/hotelPrice"
+                        android:id="@+id/lblPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -63,6 +62,11 @@
                         android:textAppearance="?attr/textAppearanceBody2"
                         android:textColor="?android:attr/textColorSecondary"
                         />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Book Now" />
 
                 </LinearLayout>
 
@@ -72,10 +76,6 @@
                     android:layout_margin="8dp"
                     android:orientation="vertical">
 
-                    <com.google.android.material.button.MaterialButton
-                        android:layout_width="150dp"
-                        android:layout_height="wrap_content"
-                        android:text="Book Now" />
                 </LinearLayout>
             </LinearLayout>
 

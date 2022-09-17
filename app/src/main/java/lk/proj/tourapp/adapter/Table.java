@@ -1,40 +1,57 @@
 package lk.proj.tourapp.adapter;
 
-public class Table {
-    String name, tableNo, hotelName;
-    int noOfSeats;
-    double bookingCharge;
+import java.io.Serializable;
 
-    public Table(String name, String tableNo, String hotelName, int noOfSeats, double bookingCharge) {
-        this.name = name;
-        this.tableNo = tableNo;
-        this.hotelName = hotelName;
+public class Table implements Serializable {
+    private String tableId;
+    private String restaurantName;
+    private double bookingPrice;
+    private String imageUrl;
+    private int noOfSeats;
+    private String location;
+
+    public Table() {
+    }
+
+    public Table(String tableId, String restaurantName, double bookingPrice, String imageUrl, int noOfSeats, String location) {
+        this.tableId = tableId;
+        this.restaurantName = restaurantName;
+        this.bookingPrice = bookingPrice;
+        this.imageUrl = imageUrl;
         this.noOfSeats = noOfSeats;
-        this.bookingCharge = bookingCharge;
+        this.location = location;
     }
 
-    public String getHotelName() {
-        return hotelName;
+    public String getTableId() {
+        return tableId;
     }
 
-    public void setHotelName(String hotelName) {
-        this.hotelName = hotelName;
+    public void setTableId(String tableId) {
+        this.tableId = tableId;
     }
 
-    public String getName() {
-        return name;
+    public String getRestaurantName() {
+        return restaurantName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRestaurantName(String restaurantName) {
+        this.restaurantName = restaurantName;
     }
 
-    public String getTableNo() {
-        return tableNo;
+    public double getBookingPrice() {
+        return bookingPrice;
     }
 
-    public void setTableNo(String tableNo) {
-        this.tableNo = tableNo;
+    public void setBookingPrice(double bookingPrice) {
+        this.bookingPrice = bookingPrice;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public int getNoOfSeats() {
@@ -45,11 +62,11 @@ public class Table {
         this.noOfSeats = noOfSeats;
     }
 
-    public double getBookingCharge() {
-        return bookingCharge;
+    public String getLocation() {
+        return location;
     }
 
-    public void setBookingCharge(double bookingCharge) {
-        this.bookingCharge = bookingCharge;
+    public void setLocation(String location) {
+        this.location = location;
     }
 }
