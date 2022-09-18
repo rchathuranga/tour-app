@@ -10,6 +10,9 @@ public class User implements Serializable {
     private String advisorId;
     private String hotelId;
     private String cabId;
+    private String checkIn;
+    private String checkOut;
+    private int noOfPeople;
 
     public String getUserId() {
         return userId;
@@ -60,16 +63,37 @@ public class User implements Serializable {
         this.cabId = cabId;
     }
 
+    public String getCheckIn() {
+        return checkIn;
+    }
+    public void setCheckIn(String checkIn) {
+        this.checkIn = checkIn;
+    }
+
+    public String getCheckOut() {
+        return checkOut;
+    }
+    public void setCheckOut(String checkOut) {
+        this.checkOut = checkOut;
+    }
+
+    public int getNoOfPeople() {
+        return noOfPeople;
+    }
+    public void setNoOfPeople(int noOfPeople) {
+        this.noOfPeople = noOfPeople;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "userId='" + userId + '\'' +
-                ", name='" + name + '\'' +
-                ", contactNo='" + contactNo + '\'' +
-                ", email='" + email + '\'' +
-                ", advisorId='" + advisorId + '\'' +
-                ", hotelId='" + hotelId + '\'' +
-                ", cabId='" + cabId + '\'' +
+                "userId='" + getUserId() + '\'' +
+                ", name='" + getName() + '\'' +
+                ", contactNo='" + getContactNo() + '\'' +
+                ", email='" + getEmail() + '\'' +
+                ", advisorId='" + getAdvisorId() + '\'' +
+                ", hotelId='" + getHotelId() + '\'' +
+                ", cabId='" + getCabId() + '\'' +
                 '}';
     }
 }

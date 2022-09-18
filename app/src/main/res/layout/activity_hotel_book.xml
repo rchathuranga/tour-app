@@ -50,8 +50,10 @@
                 app:startIconDrawable="@drawable/check_date_ic">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtHotelBookCheckIn"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></com.google.android.material.textfield.TextInputEditText>
+                    android:layout_height="wrap_content"
+                    android:inputType="date" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -63,8 +65,10 @@
                 app:startIconDrawable="@drawable/check_date_ic">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtHotelBookCheckOut"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></com.google.android.material.textfield.TextInputEditText>
+                    android:layout_height="wrap_content"
+                    android:inputType="date" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -76,21 +80,10 @@
                 app:startIconDrawable="@drawable/people_ic">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtHotelBookNoOfPeople"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></com.google.android.material.textfield.TextInputEditText>
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:hint="Price"
-                app:startIconDrawable="@drawable/pay_amount_ic">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></com.google.android.material.textfield.TextInputEditText>
+                    android:layout_height="wrap_content"
+                    android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -104,7 +97,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtHBUserName"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></com.google.android.material.textfield.TextInputEditText>
+                    android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -118,23 +111,13 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtHBUserContactNo"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></com.google.android.material.textfield.TextInputEditText>
+                    android:layout_height="wrap_content"
+                    android:inputType="phone" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="6dp"
-                android:hint="Pay"
-                app:startIconDrawable="@drawable/payment_ic">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"></com.google.android.material.textfield.TextInputEditText>
-            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
+                android:id="@+id/btnHotelBook"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"

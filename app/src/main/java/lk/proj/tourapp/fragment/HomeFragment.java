@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,10 +23,14 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import lk.proj.tourapp.Advisor_Details;
 import lk.proj.tourapp.Hotel_Details;
+import lk.proj.tourapp.LoginActivity;
+import lk.proj.tourapp.MainActivity;
 import lk.proj.tourapp.ProfileActivity;
 import lk.proj.tourapp.R;
 import lk.proj.tourapp.adapter.Advisor;
@@ -64,6 +69,7 @@ public class HomeFragment extends Fragment {
     ImageView imgHomeCabImage;
 
     public HomeFragment() {
+        System.out.println("Here");
     }
 
 
@@ -80,6 +86,25 @@ public class HomeFragment extends Fragment {
 
         db = FirebaseFirestore.getInstance();
         user = (User) requireActivity().getIntent().getSerializableExtra("user");
+
+        db.collection("users")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                user.setUserId(user.getUserId());
+                                user.setName(document.getData().get("name").toString());
+                                user.setContactNo(document.getData().get("contactNo").toString());
+                                user.setEmail(document.getData().get("email").toString());
+                                user.setAdvisorId(document.getData().get("advisorId").toString());
+                                user.setHotelId(document.getData().get("hotelId").toString());
+                                user.setCabId(document.getData().get("cabId").toString());
+                            }
+                        }
+                    }
+                });
     }
 
     @Override
@@ -126,11 +151,11 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
         loadAdvisorData();
         loadHotelData();
         loadCabData();
     }
+
 
     @SuppressLint("SetTextI18n")
     public void loadAdvisorData() {
