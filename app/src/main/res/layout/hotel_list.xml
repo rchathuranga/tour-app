@@ -37,9 +37,10 @@
                     <!-- Title, secondary and supporting text -->
                     <TextView
                         android:id="@+id/hotelName"
-                        android:textSize="30sp"
+                        android:textSize="25sp"
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
+                        android:maxWidth="200dp"
                         android:layout_height="wrap_content"
                         android:text="Hotel Name"
                         android:textAppearance="?attr/textAppearanceHeadline6"
@@ -66,21 +67,21 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:orientation="vertical">
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnMoreInfo"
-                        android:layout_width="150dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:text="More Info" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/btnBookNow"
-                        android:layout_width="150dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Book Now" />
                 </LinearLayout>

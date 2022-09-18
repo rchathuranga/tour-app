@@ -1,5 +1,7 @@
 package lk.proj.tourapp.adapter;
 
+import android.view.View;
+
 import java.io.Serializable;
 
 public class Table implements Serializable {
@@ -9,6 +11,7 @@ public class Table implements Serializable {
     private String imageUrl;
     private int noOfSeats;
     private String location;
+    private View.OnClickListener bookBtnAction;
 
     public Table() {
     }
@@ -68,5 +71,13 @@ public class Table implements Serializable {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public View.OnClickListener getBookBtnAction() {
+        return bookBtnAction;
+    }
+
+    public void setBookBtnAction(View.OnClickListener bookBtnAction) {
+        this.bookBtnAction = bookBtnAction;
     }
 }

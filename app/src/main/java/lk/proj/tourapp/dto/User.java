@@ -10,6 +10,7 @@ public class User implements Serializable {
     private String advisorId;
     private String hotelId;
     private String cabId;
+    private String restaurantId;
     private String checkIn;
     private String checkOut;
     private int noOfPeople;
@@ -61,6 +62,13 @@ public class User implements Serializable {
     }
     public void setCabId(String cabId) {
         this.cabId = cabId;
+    }
+
+    public String getRestaurantId() {
+        return restaurantId;
+    }
+    public void setRestaurantId(String restaurantId) {
+        this.restaurantId = restaurantId;
     }
 
     public String getCheckIn() {

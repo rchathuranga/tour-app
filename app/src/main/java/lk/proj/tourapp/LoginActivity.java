@@ -13,11 +13,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -111,7 +113,35 @@ public class LoginActivity extends AppCompatActivity {
     public void validateUserAndNavigate() {
         FirebaseUser user = mAuth.getCurrentUser();
 
-        db.collection("users")
+        db.collection("users").document(user.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    User myUser = new User();
+                    myUser.setUserId(user.getUid());
+                    myUser.setName(document.getData().get("name").toString());
+                    myUser.setContactNo(document.getData().get("contactNo").toString());
+                    myUser.setEmail(document.getData().get("email").toString());
+                    myUser.setAdvisorId(document.getData().get("advisorId").toString());
+                    myUser.setHotelId(document.getData().get("hotelId").toString());
+                    myUser.setCabId(document.getData().get("cabId").toString());
+                    myUser.setCheckIn(document.getData().get("checkIn").toString());
+                    myUser.setCheckOut(document.getData().get("checkOut").toString());
+                    myUser.setNoOfPeople(Integer.parseInt(document.getData().get("noOfPeople").toString()));
+                    myUser.setRestaurantId(document.getData().get("restaurantId").toString());
+
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.putExtra("user", myUser);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(LoginActivity.this, "Authentication failed.",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        /*db.collection("users")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -139,6 +169,6 @@ public class LoginActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                         }
                     }
-                });
+                });*/
     }
 }

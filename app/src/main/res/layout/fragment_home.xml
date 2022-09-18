@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#F4F4F4"
     android:id="@+id/fragmentHome"
-    android:layout_marginBottom="100dp"
+    android:layout_marginBottom="120dp"
     tools:context=".fragment.HomeFragment">
 
     <ScrollView
@@ -360,6 +360,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/lblTableNo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:width="150dp"
@@ -376,6 +377,7 @@
                             android:src="@drawable/table" />
 
                         <TextView
+                            android:id="@+id/lblHomeTableName"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
@@ -383,6 +385,7 @@
                             android:textAlignment="center" />
 
                         <TextView
+                            android:id="@+id/lblHomeTableContactNo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"

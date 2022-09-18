@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import lk.proj.tourapp.Hotel_Book;
 import lk.proj.tourapp.Hotel_Details;
 import lk.proj.tourapp.R;
+import lk.proj.tourapp.RestaurantBook;
 import lk.proj.tourapp.adapter.Hotel;
 import lk.proj.tourapp.adapter.HotelListAdapter;
 import lk.proj.tourapp.adapter.Table;
@@ -112,6 +113,18 @@ public class TableFragment extends Fragment {
                                 table.setBookingPrice(Double.parseDouble(document.getData().get("bookingCharge").toString()));
                                 table.setImageUrl(document.getData().get("imageUrl").toString());
                                 table.setLocation(document.getData().get("location").toString());
+                                table.setBookBtnAction(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        table.setBookBtnAction(null);
+                                        
+                                        Intent intent = new Intent(getActivity(), RestaurantBook.class);
+                                        intent.putExtra("user", user);
+                                        intent.putExtra("table", table);
+                                        startActivity(intent);
+
+                                    }
+                                });
 
                                 tableList.add(table);
                                 ad.notifyDataSetChanged();

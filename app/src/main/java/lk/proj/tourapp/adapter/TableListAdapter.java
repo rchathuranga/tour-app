@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.material.button.MaterialButton;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ public class TableListAdapter extends BaseAdapter {
 
     private class ViewHolder{
         TextView lblRestaurantName, lblLocation, lblPrice;
+        MaterialButton btnBookTable;
         ImageView imgRestaurantImage;
     }
 
@@ -63,6 +65,7 @@ public class TableListAdapter extends BaseAdapter {
             holder.lblLocation = (TextView) row.findViewById(R.id.lblTLocation);
             holder.lblPrice = (TextView) row.findViewById(R.id.lblPrice);
             holder.imgRestaurantImage = row.findViewById(R.id.imgRestaurantImage);
+            holder.btnBookTable = row.findViewById(R.id.btnBookTable);
             row.setTag(holder);
 
         }else {
@@ -75,6 +78,7 @@ public class TableListAdapter extends BaseAdapter {
         holder.lblLocation.setText(table.getLocation());
         holder.lblPrice.setText(String.valueOf(table.getBookingPrice()));
         Picasso.get().load(table.getImageUrl()).into(holder.imgRestaurantImage);
+        holder.btnBookTable.setOnClickListener(table.getBookBtnAction());
         return row;
     }
 }

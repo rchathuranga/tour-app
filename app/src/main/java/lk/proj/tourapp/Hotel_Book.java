@@ -61,7 +61,6 @@ public class Hotel_Book extends AppCompatActivity {
         txtContact.setText(user.getContactNo());
 
         final Date todayDate = new Date();
-
         String date = new SimpleDateFormat("dd-MM-yyyy").format(todayDate);
 
 

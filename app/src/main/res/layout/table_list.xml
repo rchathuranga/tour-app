@@ -64,6 +64,7 @@
                         />
 
                     <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnBookTable"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:text="Book Now" />

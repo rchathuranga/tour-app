@@ -122,6 +122,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     firestoreUser.put("noOfPeople", 0);
                                     firestoreUser.put("hotelId", "");
                                     firestoreUser.put("userId", user.getUid());
+                                    firestoreUser.put("restaurantId", "");
 
 
                                     db.collection("users").document(user.getUid()).set(firestoreUser)

@@ -21,11 +21,14 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
+
+import java.util.Objects;
 
 import lk.proj.tourapp.Advisor_Details;
 import lk.proj.tourapp.Hotel_Details;
@@ -36,6 +39,7 @@ import lk.proj.tourapp.R;
 import lk.proj.tourapp.adapter.Advisor;
 import lk.proj.tourapp.adapter.Cab;
 import lk.proj.tourapp.adapter.Hotel;
+import lk.proj.tourapp.adapter.Table;
 import lk.proj.tourapp.dto.User;
 
 /**
@@ -46,6 +50,7 @@ import lk.proj.tourapp.dto.User;
 public class HomeFragment extends Fragment {
     private User user;
     private FirebaseFirestore db;
+    private FirebaseAuth mAuth;
 
     TextView lblHomeUsername;
     ImageButton btnHomeAccount;
@@ -68,9 +73,11 @@ public class HomeFragment extends Fragment {
     ImageView imgHomeCabVehicleType;
     ImageView imgHomeCabImage;
 
-    public HomeFragment() {
-        System.out.println("Here");
-    }
+    TextView lblHomeTableName;
+    TextView lblHomeTableContactNo;
+    TextView lblTableNo;
+
+    public HomeFragment() {}
 
 
     public static HomeFragment newInstance(String param1, String param2) {
@@ -85,9 +92,33 @@ public class HomeFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         db = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
         user = (User) requireActivity().getIntent().getSerializableExtra("user");
 
-        db.collection("users")
+        db.collection("users").document(mAuth.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+
+                    user.setUserId(mAuth.getUid());
+                    user.setName(document.getData().get("name").toString());
+                    user.setContactNo(document.getData().get("contactNo").toString());
+                    user.setEmail(document.getData().get("email").toString());
+                    user.setAdvisorId(document.getData().get("advisorId").toString());
+                    user.setHotelId(document.getData().get("hotelId").toString());
+                    user.setCabId(document.getData().get("cabId").toString());
+
+                    lblHomeUsername.setText(user.getName());
+                    loadAdvisorData();
+                    loadHotelData();
+                    loadCabData();
+                    loadRestaurantData();
+                }
+            }
+        });
+
+    /*    db.collection("users")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -104,7 +135,7 @@ public class HomeFragment extends Fragment {
                             }
                         }
                     }
-                });
+                });*/
     }
 
     @Override
@@ -140,8 +171,10 @@ public class HomeFragment extends Fragment {
         imgHomeCabVehicleType = view.findViewById(R.id.imgHomeCabVehicleType);
         imgHomeCabImage = view.findViewById(R.id.imgHomeCabImage);
 
-        System.out.println("user "+ user);
-        lblHomeUsername.setText(user.getName());
+        lblHomeTableName = view.findViewById(R.id.lblHomeTableName);
+        lblHomeTableContactNo = view.findViewById(R.id.lblHomeTableContactNo);
+        lblTableNo = view.findViewById(R.id.lblTableNo);
+
         btnHomeAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -150,10 +183,6 @@ public class HomeFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-        loadAdvisorData();
-        loadHotelData();
-        loadCabData();
     }
 
 
@@ -304,6 +333,39 @@ public class HomeFragment extends Fragment {
                                 Picasso.get().load(cab.getImageUrl()).into(imgHomeCabImage);
                                 lblHomeCabName.setText(cab.getDriverName());
                                 lblHomeCabContactNo.setText(cab.getContactNo());
+                            }
+                        }
+                    });
+        }
+    }
+
+
+    public void loadRestaurantData() {
+        if (user.getRestaurantId().isEmpty()) {
+            lblHomeTableName.setText("No Table booked");
+            lblHomeTableContactNo.setVisibility(View.GONE);
+            lblTableNo.setText("--");
+        }else {
+            db.collection("resturants").document(user.getRestaurantId()).get()
+                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+
+                                Table table = new Table();
+
+                                table.setTableId(document.getId());
+                                table.setRestaurantName(document.getData().get("restaurantName").toString());
+                                table.setNoOfSeats(Integer.parseInt(document.getData().get("noOfSeats").toString()));
+                                table.setBookingPrice(Double.parseDouble(document.getData().get("bookingCharge").toString()));
+                                table.setImageUrl(document.getData().get("imageUrl").toString());
+                                table.setLocation(document.getData().get("location").toString());
+
+
+
+                                lblHomeTableName.setText(table.getRestaurantName());
+                                lblHomeTableContactNo.setText(table.getLocation());
                             }
                         }
                     });
