@@ -58,33 +58,43 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                String email = txtEmail.getText().toString();
-//                String password = txtPassword.getText().toString();
-                String email = "user@gmail.com";
-                String password = "user@123";
+                String email = txtEmail.getText().toString();
+                String password = txtPassword.getText().toString();
 
-                btnLogin.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
+                if (email.isEmpty()) {
+                    Toast.makeText(LoginActivity.this, "Email is Required",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-                        mAuth.signInWithEmailAndPassword(email, password)
-                                .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<AuthResult> task) {
-                                        if (task.isSuccessful()) {
-                                            validateUserAndNavigate();
-                                        } else {
-                                            // If sign in fails, display a message to the user.
+                if (!email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
+                    Toast.makeText(LoginActivity.this, "Invalid Email",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (password.isEmpty()) {
+                    Toast.makeText(LoginActivity.this, "Password is Required",
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+
+                mAuth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    validateUserAndNavigate();
+                                } else {
+                                    // If sign in fails, display a message to the user.
 //                                        Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                            Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                                    Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
+                                    Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
 
-
-                    }
-                });
             }
         });
 
@@ -116,6 +126,9 @@ public class LoginActivity extends AppCompatActivity {
                                 myUser.setAdvisorId(document.getData().get("advisorId").toString());
                                 myUser.setHotelId(document.getData().get("hotelId").toString());
                                 myUser.setCabId(document.getData().get("cabId").toString());
+                                myUser.setCheckIn(document.getData().get("checkIn").toString());
+                                myUser.setCheckOut(document.getData().get("checkOut").toString());
+                                myUser.setNoOfPeople(Integer.parseInt(document.getData().get("noOfPeople").toString()));
 
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 intent.putExtra("user", myUser);

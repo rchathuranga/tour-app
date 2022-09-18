@@ -81,18 +81,8 @@ public class RegisterActivity extends AppCompatActivity {
                 }
 
                 if (email.isEmpty()) {
-//                    Toast.makeText(activity_register.this, "Email is Required",
-//                            Toast.LENGTH_SHORT).show();
-                    new AlertDialog.Builder(RegisterActivity.this)
-                            .setTitle("Alert")
-                            .setMessage("Email is Required")
-                            .setCancelable(false)
-                            .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                }
-                            }).show();
+                    Toast.makeText(RegisterActivity.this, "Email is Required",
+                            Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -103,18 +93,8 @@ public class RegisterActivity extends AppCompatActivity {
                 }
 
                 if (password.isEmpty()) {
-//                    Toast.makeText(activity_register.this, "Password is Required",
-//                            Toast.LENGTH_SHORT).show();
-                    new AlertDialog.Builder(RegisterActivity.this)
-                            .setTitle("Alert")
-                            .setMessage("Password is Required")
-                            .setCancelable(false)
-                            .setPositiveButton("ok", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                }
-                            }).show();
+                    Toast.makeText(RegisterActivity.this, "Password is Required",
+                            Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -135,6 +115,14 @@ public class RegisterActivity extends AppCompatActivity {
                                     firestoreUser.put("name", name);
                                     firestoreUser.put("email", email);
                                     firestoreUser.put("contactNo", contactNo);
+                                    firestoreUser.put("advisorId", "");
+                                    firestoreUser.put("cabId", "");
+                                    firestoreUser.put("checkIn", "");
+                                    firestoreUser.put("checkOut", "");
+                                    firestoreUser.put("noOfPeople", 0);
+                                    firestoreUser.put("hotelId", "");
+                                    firestoreUser.put("userId", user.getUid());
+
 
                                     db.collection("users").document(user.getUid()).set(firestoreUser)
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -148,6 +136,9 @@ public class RegisterActivity extends AppCompatActivity {
                                                     user1.setAdvisorId("");
                                                     user1.setHotelId("");
                                                     user1.setCabId("");
+                                                    user1.setCheckIn("");
+                                                    user1.setCheckOut("");
+                                                    user1.setNoOfPeople(0);
 
                                                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                                     intent.putExtra("user", user1);
