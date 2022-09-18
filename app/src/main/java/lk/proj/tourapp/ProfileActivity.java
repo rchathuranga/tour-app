@@ -9,7 +9,7 @@ import lk.proj.tourapp.dto.User;
 
 public class ProfileActivity extends AppCompatActivity {
     User user;
-    TextView lblProfileContactNo;
+    TextView lblProfileContactNo, lblProfileName, lblProfileId;
     TextView lblProfileEmail;
 
     @Override
@@ -21,7 +21,11 @@ public class ProfileActivity extends AppCompatActivity {
 
         lblProfileContactNo = findViewById(R.id.lblProfileContactNo);
         lblProfileEmail = findViewById(R.id.lblProfileEmail);
+        lblProfileId = findViewById(R.id.lblProfileId);
+        lblProfileName = findViewById(R.id.lblProfileName);
 
+        lblProfileId.setText("ID: "+user.getUserId());
+        lblProfileName.setText(user.getName());
         lblProfileEmail.setText(user.getEmail());
         lblProfileContactNo.setText(user.getContactNo());
     }

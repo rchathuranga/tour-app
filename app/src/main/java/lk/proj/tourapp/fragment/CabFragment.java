@@ -26,6 +26,7 @@ import lk.proj.tourapp.R;
 import lk.proj.tourapp.adapter.Cab;
 import lk.proj.tourapp.adapter.CabListAdapter;
 import lk.proj.tourapp.adapter.Hotel;
+import lk.proj.tourapp.dto.User;
 
 import java.util.ArrayList;
 
@@ -38,6 +39,7 @@ public class CabFragment extends Fragment {
     private FirebaseFirestore db;
     private GridView gridView;
     Button btnSearch;
+    private User user;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -90,6 +92,8 @@ public class CabFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        user = (User) requireActivity().getIntent().getSerializableExtra("user");
+
         ArrayList<Cab> cabList = new ArrayList<>();
         CabListAdapter adapter = new CabListAdapter(getActivity(), R.layout.cab_list, cabList);
         gridView = (GridView) view.findViewById(R.id.cabListView);
@@ -133,6 +137,7 @@ public class CabFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), Cab_Booking.class);
 //                intent.putExtra("user", user);
                 intent.putExtra("cab", cabList.get(i));
+                intent.putExtra("user", user);
                 System.out.println(cabList.get(i));
                 startActivity(intent);
             }

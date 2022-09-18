@@ -7,83 +7,87 @@
     tools:context=".Cab_Booking">
 
     <androidx.core.widget.NestedScrollView
-        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
+
         <LinearLayout
-            android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="10dp">
+
             <TextView
-                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fill Your Details"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="Fill Your Details"
                 android:textColor="#0575C1"
                 android:textSize="27dp"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/cabDriverName"
-                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cab Driver : Car"
                 android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="Cab Driver : Car"
                 android:textColor="#078059"
                 android:textSize="16dp"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
+
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="6dp"
                 android:hint="Your Location"
-                android:layout_margin="6dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 app:startIconDrawable="@drawable/ic_outline_location_on_24">
+
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtCabLocation"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                </com.google.android.material.textfield.TextInputEditText>
+                    android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="6dp"
                 android:hint="Name"
-                android:layout_margin="6dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 app:startIconDrawable="@drawable/name_ic">
+
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtCabName"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                </com.google.android.material.textfield.TextInputEditText>
+                    android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Contact"
                 android:layout_margin="6dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="Contact"
                 app:startIconDrawable="@drawable/contact_ic">
+
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txtCabContact"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                </com.google.android.material.textfield.TextInputEditText>
+                    android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/btnCabHire"
-                android:background="@drawable/buttonstyler"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
-                android:text="Hire"
-                />
+                android:background="@drawable/buttonstyler"
+                android:text="Hire" />
 
         </LinearLayout>
 
